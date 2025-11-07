@@ -1,3 +1,4 @@
+import { FaUserAlt } from "react-icons/fa";
 import Container from "./Container";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -10,34 +11,26 @@ import Title from "./ui/title";
 import SocialLinks from "./SocialLinks";
 import { IoMdCart } from "react-icons/io";
 import { useSelector } from "react-redux";
-import { FaUserAlt } from "react-icons/fa";
+
 export const headerNavigation = [
   {
-    title: "Home",
+    title: "Trang chủ",
     link: "/",
   },
   {
-    title: "Shop",
+    title: "Cửa hàng",
     link: "/shop",
   },
   {
-    title: "About",
+    title: "Giới thiệu",
     link: "/about",
   },
   {
-    title: "Contact",
+    title: "Liên hệ",
     link: "/contact",
   },
-  // {
-  //   title: "Blog",
-  //   link: "/blog",
-  // },
-  // {
-  //   title: "FAQ",
-  //   link: "/faq",
-  // },
   {
-    title: "Orders",
+    title: "Đơn hàng",
     link: "/orders",
   },
 ];
@@ -47,36 +40,36 @@ const Header = () => {
   const { products, userInfo, orderCount } = useSelector(
     (state) => state.orebiReducer
   );
-  let [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <div className="border-b border-gray-200 sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
-      {" "}
       <Container className="py-4 lg:py-6 flex items-center gap-x-3 md:gap-x-7 justify-between">
+        {/* Logo */}
         <Link to={"/"} className="flex-shrink-0">
           <img src={logo} alt="logo" className="h-5 w-auto" />
         </Link>
 
+        {/* Ô tìm kiếm */}
         <SearchInput />
 
+        {/* Menu desktop */}
         <div className="hidden md:inline-flex items-center gap-4 lg:gap-x-6 text-sm uppercase font-medium text-gray-700">
           {headerNavigation.map((item) => (
             <NavLink
-              key={item?.title}
+              key={item.title}
               className={`hover:text-black duration-300 relative group overflow-hidden px-1 py-2 transition-colors ${
-                location?.pathname === item?.link
+                location.pathname === item.link
                   ? "text-black font-semibold"
                   : "text-gray-700"
               }`}
-              to={item?.link}
+              to={item.link}
               state={{ data: location.pathname.split("/")[1] }}
             >
               <div className="relative flex items-center">
-                {item?.title}
-                {item?.title === "Orders" && userInfo && orderCount > 0 && (
+                {item.title}
+                {item.title === "Đơn hàng" && userInfo && orderCount > 0 && (
                   <span className="absolute -right-1 -top-2 w-4 h-4 rounded-full text-xs bg-red-500 text-white flex items-center justify-center font-medium animate-pulse">
                     {orderCount}
                   </span>
@@ -84,7 +77,7 @@ const Header = () => {
               </div>
               <span
                 className={`absolute bottom-0 left-0 inline-block w-full h-0.5 bg-black group-hover:translate-x-0 duration-300 ease-out ${
-                  location?.pathname === item?.link
+                  location.pathname === item.link
                     ? "translate-x-0"
                     : "-translate-x-full"
                 }`}
@@ -92,6 +85,7 @@ const Header = () => {
             </NavLink>
           ))}
 
+          {/* Giỏ hàng */}
           <Link
             to={"/cart"}
             className="text-2xl text-gray-700 hover:text-black relative transition-colors duration-300 p-2"
@@ -104,6 +98,7 @@ const Header = () => {
             )}
           </Link>
 
+          {/* Người dùng */}
           {userInfo ? (
             <Link
               to={"/profile"}
@@ -126,6 +121,7 @@ const Header = () => {
           )}
         </div>
 
+        {/* Nút menu di động */}
         <button
           onClick={toggleMenu}
           className="text-2xl text-gray-700 hover:text-black duration-300 md:hidden p-2 hover:bg-gray-50 rounded-md transition-all"
@@ -133,6 +129,7 @@ const Header = () => {
           <HiOutlineMenu />
         </button>
 
+        {/* Menu mobile */}
         <Dialog
           open={isOpen}
           onClose={() => setIsOpen(false)}
@@ -155,14 +152,13 @@ const Header = () => {
                 </div>
 
                 <div className="space-y-1">
-                  {headerNavigation?.map((item) => (
+                  {headerNavigation.map((item) => (
                     <NavLink
-                      key={item?.title}
-                      to={item?.link}
+                      key={item.title}
+                      to={item.link}
                       onClick={() => setIsOpen(false)}
-                      state={{ data: location.pathname.split("/")[1] }}
                       className={`block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-black transition-all duration-200 transform hover:translate-x-1 ${
-                        location?.pathname === item?.link
+                        location.pathname === item.link
                           ? "bg-gray-100 text-black font-semibold"
                           : ""
                       }`}
@@ -171,14 +167,14 @@ const Header = () => {
                         <div className="flex items-center gap-3">
                           <div
                             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                              location?.pathname === item?.link
+                              location.pathname === item.link
                                 ? "bg-black"
                                 : "bg-gray-300"
                             }`}
                           />
-                          {item?.title}
+                          {item.title}
                         </div>
-                        {item?.title === "Orders" &&
+                        {item.title === "Đơn hàng" &&
                           userInfo &&
                           orderCount > 0 && (
                             <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -189,14 +185,15 @@ const Header = () => {
                     </NavLink>
                   ))}
 
+                  {/* Giỏ hàng */}
                   <Link
                     to={"/cart"}
                     onClick={() => setIsOpen(false)}
                     className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-black transition-all duration-200 transform hover:translate-x-1"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gray-300" />
-                      <span>Cart</span>
+                      <IoMdCart />
+                      <span>Giỏ hàng</span>
                       {products?.length > 0 && (
                         <span className="ml-auto bg-black text-white text-xs px-2 py-1 rounded-full">
                           {products.length}
@@ -205,6 +202,7 @@ const Header = () => {
                     </div>
                   </Link>
 
+                  {/* Hồ sơ */}
                   {userInfo ? (
                     <Link
                       to={"/profile"}
@@ -212,8 +210,8 @@ const Header = () => {
                       className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-black transition-all duration-200 transform hover:translate-x-1"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-gray-300" />
-                        <span>Profile ({userInfo?.name})</span>
+                        <FaUserAlt />
+                        <span>Hồ sơ ({userInfo?.name})</span>
                       </div>
                     </Link>
                   ) : (
@@ -223,8 +221,8 @@ const Header = () => {
                       className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-black transition-all duration-200 transform hover:translate-x-1"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-gray-300" />
-                        Sign In
+                        <FaUserAlt />
+                        <span>Đăng nhập</span>
                       </div>
                     </Link>
                   )}
@@ -234,7 +232,7 @@ const Header = () => {
                   <SocialLinks />
                 </div>
               </div>
-            </DialogPanel>{" "}
+            </DialogPanel>
           </div>
         </Dialog>
       </Container>

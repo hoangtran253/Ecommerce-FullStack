@@ -60,7 +60,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
       {/* Search */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Search Products
+          Tìm kiếm sản phẩm
         </h3>
         <div className="relative">
           <input
@@ -88,7 +88,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
 
       {/* Categories */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Danh mục</h3>
         <div className="space-y-3">
           {categories.map((category) => (
             <label
@@ -111,7 +111,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
 
       {/* Brands */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Brands</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Thương hiệu</h3>
         <div className="space-y-3 max-h-60 overflow-y-auto">
           {brands.map((brand) => (
             <label
@@ -135,13 +135,13 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
       {/* Price Range */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Price Range
+          Phạm vi giá
         </h3>
         <div className="space-y-4">
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="block text-sm text-gray-600 mb-1">
-                Min Price
+                Giá tối thiểu
               </label>
               <input
                 type="number"
@@ -155,7 +155,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
             </div>
             <div className="flex-1">
               <label className="block text-sm text-gray-600 mb-1">
-                Max Price
+                Giá tối đa
               </label>
               <input
                 type="number"
@@ -172,13 +172,13 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
             onClick={() => handlePriceChange(priceRange.min, priceRange.max)}
             className="w-full bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
           >
-            Apply Price Filter
+            Áp dụng bộ lọc giá
           </button>
         </div>
 
         {/* Preset Price Ranges */}
         <div className="mt-4 space-y-2">
-          <h4 className="text-sm font-medium text-gray-700">Quick Filters:</h4>
+          <h4 className="text-sm font-medium text-gray-700">Bộ lọc nhanh:</h4>
           <div className="flex flex-wrap gap-2">
             {[
               { label: "Under $50", min: 0, max: 50 },
@@ -201,7 +201,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
       {/* Rating Filter */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Customer Rating
+          Đánh giá của khách hàng
         </h3>
         <div className="space-y-3">
           {[5, 4, 3, 2, 1].map((rating) => (
@@ -241,7 +241,7 @@ const ProductsSideNav = ({ onFilterChange, filters, onClearFilters }) => {
           onClick={onClearFilters}
           className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium"
         >
-          Clear All Filters
+          Xóa tất cả bộ lọc
         </button>
       </div>
     </div>

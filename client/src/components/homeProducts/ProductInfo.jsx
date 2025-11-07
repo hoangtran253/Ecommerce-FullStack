@@ -35,7 +35,7 @@ const ProductInfo = ({ productInfo }) => {
         )} reviews)`}</p>
       </div>
       <p className="text-base text-gray-600">{productInfo.description}</p>
-      <p className="text-sm">Be the first to leave a review.</p>
+      <p className="text-sm">Hãy là người đầu tiên để lại đánh giá!</p>
 
       <AddToCartButton item={productInfo} />
 

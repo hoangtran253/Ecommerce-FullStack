@@ -33,7 +33,7 @@ const ProductsOnSale = () => {
         <h3 className="font-titleFont text-xl font-semibold mb-6 underline underline-offset-4 decoration-[1px]">
           Products on sale
         </h3>
-        <p className="text-gray-500">No products on sale at the moment.</p>
+        <p className="text-gray-500">Hiện tại không có sản phẩm nào được bán.</p>
       </div>
     );
   }
@@ -41,7 +41,7 @@ const ProductsOnSale = () => {
   return (
     <div>
       <h3 className="font-titleFont text-xl font-semibold mb-6 underline underline-offset-4 decoration-[1px]">
-        Products on sale
+       Sản phẩm đang bán
       </h3>
       <div className="flex flex-col gap-2">
         {products.map((item) => (

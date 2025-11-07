@@ -15,102 +15,102 @@ const FAQ = () => {
 
   const faqData = [
     {
-      category: "Orders & Shipping",
+      category: "Đơn hàng & Giao hàng",
       questions: [
         {
-          question: "How long does shipping take?",
+          question: "Thời gian giao hàng mất bao lâu?",
           answer:
-            "Standard shipping typically takes 3-5 business days within the continental US. Express shipping (1-2 business days) and overnight shipping are also available for an additional fee. International shipping times vary by location, typically 7-14 business days.",
+            "Thời gian giao hàng tiêu chuẩn thường mất 3–5 ngày làm việc trong nội địa. Giao hàng nhanh (1–2 ngày) và giao hàng qua đêm có sẵn với phụ phí. Đối với quốc tế, thời gian thường từ 7–14 ngày làm việc tùy khu vực.",
         },
         {
-          question: "Can I track my order?",
+          question: "Tôi có thể theo dõi đơn hàng của mình không?",
           answer:
-            "Yes! Once your order ships, you'll receive a tracking number via email. You can also track your orders by logging into your account and visiting the 'My Orders' section.",
+            "Có! Sau khi đơn hàng được gửi đi, bạn sẽ nhận được email chứa mã theo dõi. Bạn cũng có thể theo dõi đơn hàng bằng cách đăng nhập vào tài khoản và truy cập mục 'Đơn hàng của tôi'.",
         },
         {
-          question: "What is your return policy?",
+          question: "Chính sách đổi trả của cửa hàng là gì?",
           answer:
-            "We offer a 30-day return policy for unused items in original packaging. Items must be returned within 30 days of delivery. Refunds will be processed within 5-7 business days after we receive your return.",
+            "Chúng tôi chấp nhận đổi trả trong vòng 30 ngày đối với sản phẩm chưa sử dụng và còn nguyên bao bì. Hoàn tiền sẽ được xử lý trong 5–7 ngày làm việc sau khi nhận được hàng hoàn trả.",
         },
         {
-          question: "Do you ship internationally?",
+          question: "Cửa hàng có giao hàng quốc tế không?",
           answer:
-            "Yes, we ship to most countries worldwide. International shipping costs and delivery times vary by destination. Customers are responsible for any customs duties or taxes.",
+            "Có, chúng tôi giao hàng đến hầu hết các quốc gia trên thế giới. Phí và thời gian giao hàng quốc tế sẽ khác nhau tùy khu vực. Khách hàng chịu trách nhiệm cho mọi thuế và phí hải quan (nếu có).",
         },
       ],
     },
     {
-      category: "Products & Sizing",
+      category: "Sản phẩm & Kích cỡ",
       questions: [
         {
-          question: "How do I know what size to order?",
+          question: "Làm sao để biết nên chọn size nào?",
           answer:
-            "Each product page includes detailed size charts and measurements. You can also check our general sizing guide in the footer. If you're between sizes, we recommend sizing up. Our customer service team is happy to help with sizing questions.",
+            "Mỗi trang sản phẩm đều có bảng kích thước chi tiết. Bạn cũng có thể xem hướng dẫn chọn size chung ở cuối trang web. Nếu bạn đang ở giữa hai size, chúng tôi khuyên bạn nên chọn size lớn hơn. Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ nếu bạn cần tư vấn.",
         },
         {
-          question: "Are your products authentic?",
+          question: "Sản phẩm của cửa hàng có chính hãng không?",
           answer:
-            "Absolutely! We source all products directly from authorized distributors and brand partners. Every item comes with authenticity guarantees and original packaging.",
+            "Chắc chắn rồi! Chúng tôi nhập hàng trực tiếp từ các nhà phân phối và thương hiệu chính hãng. Tất cả sản phẩm đều có cam kết chính hãng và bao bì gốc.",
         },
         {
-          question: "Do you offer product warranties?",
+          question: "Sản phẩm có được bảo hành không?",
           answer:
-            "Yes, all products come with manufacturer warranties. Warranty terms vary by brand and product type. Extended warranty options may be available at checkout for certain items.",
+            "Có, tất cả sản phẩm đều có bảo hành của nhà sản xuất. Thời hạn bảo hành khác nhau tùy thương hiệu và loại sản phẩm. Một số mặt hàng có thể có tùy chọn gia hạn bảo hành khi thanh toán.",
         },
         {
-          question: "How often do you restock items?",
+          question: "Bao lâu thì sản phẩm được nhập lại?",
           answer:
-            "We restock popular items regularly, typically every 2-4 weeks. You can sign up for restock notifications on any out-of-stock product page. Follow us on social media for the latest updates on new arrivals.",
+            "Các sản phẩm phổ biến thường được nhập lại mỗi 2–4 tuần. Bạn có thể đăng ký nhận thông báo khi sản phẩm được nhập lại trên trang chi tiết sản phẩm. Theo dõi chúng tôi trên mạng xã hội để cập nhật hàng mới nhanh nhất!",
         },
       ],
     },
     {
-      category: "Account & Payment",
+      category: "Tài khoản & Thanh toán",
       questions: [
         {
-          question: "Do I need an account to make a purchase?",
+          question: "Tôi có cần tạo tài khoản để mua hàng không?",
           answer:
-            "While you can checkout as a guest, creating an account allows you to track orders, save items to your wishlist, store shipping addresses, and access exclusive member benefits.",
+            "Không bắt buộc, bạn có thể thanh toán với tư cách khách. Tuy nhiên, việc tạo tài khoản sẽ giúp bạn theo dõi đơn hàng, lưu danh sách yêu thích, địa chỉ giao hàng và nhận ưu đãi dành riêng cho thành viên.",
         },
         {
-          question: "What payment methods do you accept?",
+          question: "Cửa hàng chấp nhận hình thức thanh toán nào?",
           answer:
-            "We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Shop Pay. All payments are processed securely using industry-standard encryption.",
+            "Chúng tôi chấp nhận thẻ tín dụng (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay và Shop Pay. Mọi thanh toán đều được bảo mật với chuẩn mã hóa hiện đại.",
         },
         {
-          question: "Is my payment information secure?",
+          question: "Thông tin thanh toán của tôi có an toàn không?",
           answer:
-            "Yes! We use SSL encryption and comply with PCI DSS standards to protect your payment information. We never store your credit card details on our servers.",
+            "Có! Chúng tôi sử dụng mã hóa SSL và tuân thủ tiêu chuẩn bảo mật PCI DSS. Thông tin thẻ của bạn sẽ không bao giờ được lưu trữ trên máy chủ của chúng tôi.",
         },
         {
-          question: "Can I save multiple shipping addresses?",
+          question: "Tôi có thể lưu nhiều địa chỉ giao hàng không?",
           answer:
-            "Yes, registered users can save multiple shipping addresses in their account for faster checkout. You can add, edit, or delete addresses anytime in your account settings.",
+            "Có, người dùng có tài khoản có thể lưu nhiều địa chỉ khác nhau để thanh toán nhanh hơn. Bạn có thể thêm, chỉnh sửa hoặc xóa địa chỉ bất kỳ lúc nào trong phần cài đặt tài khoản.",
         },
       ],
     },
     {
-      category: "Customer Service",
+      category: "Hỗ trợ khách hàng",
       questions: [
         {
-          question: "How can I contact customer service?",
+          question: "Làm sao để liên hệ với bộ phận chăm sóc khách hàng?",
           answer:
-            "You can reach our customer service team via email at support@orebi.com, phone at 1-800-OREBI-SHOP, or through our live chat feature. We're available Monday-Friday 9AM-6PM EST.",
+            "Bạn có thể liên hệ với chúng tôi qua email support@orebi.com, số điện thoại 1-800-OREBI-SHOP, hoặc trò chuyện trực tuyến. Giờ làm việc: Thứ 2 – Thứ 6, từ 9:00 đến 18:00 (giờ EST).",
         },
         {
-          question: "What if I receive a damaged item?",
+          question: "Nếu tôi nhận hàng bị hỏng thì sao?",
           answer:
-            "We're sorry if you received a damaged item! Please contact us within 48 hours of delivery with photos of the damage. We'll arrange for a replacement or full refund immediately.",
+            "Chúng tôi rất tiếc nếu bạn gặp phải tình huống này! Hãy liên hệ với chúng tôi trong vòng 48 giờ kể từ khi nhận hàng và gửi kèm ảnh sản phẩm bị lỗi. Chúng tôi sẽ nhanh chóng gửi sản phẩm thay thế hoặc hoàn tiền đầy đủ.",
         },
         {
-          question: "Can I cancel or modify my order?",
+          question: "Tôi có thể hủy hoặc sửa đơn hàng không?",
           answer:
-            "Orders can be cancelled or modified within 1 hour of placement. After that, orders enter our fulfillment process and cannot be changed. Please contact customer service as soon as possible if you need to make changes.",
+            "Bạn có thể hủy hoặc sửa đơn hàng trong vòng 1 giờ sau khi đặt. Sau thời gian này, đơn hàng sẽ được xử lý và không thể thay đổi. Vui lòng liên hệ sớm với chúng tôi nếu cần chỉnh sửa đơn hàng.",
         },
         {
-          question: "Do you offer price matching?",
+          question: "Cửa hàng có hỗ trợ so sánh giá không?",
           answer:
-            "Yes! We offer price matching on identical items from authorized retailers. The item must be in stock and the competitor's price must be verifiable. Contact customer service with the details for price match requests.",
+            "Có! Chúng tôi hỗ trợ so sánh giá cho các sản phẩm giống hệt từ các nhà bán lẻ được ủy quyền. Sản phẩm phải còn hàng và giá của đối thủ có thể được xác minh. Hãy gửi thông tin chi tiết để được hỗ trợ so sánh giá.",
         },
       ],
     },
@@ -119,18 +119,17 @@ const FAQ = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Container className="py-8">
-        <Breadcrumbs currentPage="FAQ" />
+        <Breadcrumbs currentPage="Câu hỏi thường gặp" />
 
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
+              Câu hỏi thường gặp
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Find answers to common questions about shopping with Orebi. Cannot
-              find what you&apos;re looking for? Contact our customer service
-              team.
+              Dưới đây là các câu hỏi phổ biến khi mua sắm tại Orebi. 
+              Không tìm thấy câu trả lời bạn cần? Hãy liên hệ với đội ngũ hỗ trợ của chúng tôi.
             </p>
           </div>
 
@@ -189,24 +188,23 @@ const FAQ = () => {
           {/* Contact Section */}
           <div className="mt-12 bg-white rounded-lg shadow-md p-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Still have questions?
+              Vẫn còn thắc mắc?
             </h2>
             <p className="text-gray-600 mb-6">
-              Our customer service team is here to help you with any questions
-              or concerns.
+              Đội ngũ hỗ trợ khách hàng của chúng tôi luôn sẵn sàng giúp bạn giải đáp mọi câu hỏi hoặc vấn đề.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a
                 href="/contact"
                 className="bg-gray-900 text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors duration-200"
               >
-                Contact Us
+                Liên hệ với chúng tôi
               </a>
               <a
                 href="mailto:support@orebi.com"
                 className="border border-gray-300 text-gray-700 px-8 py-3 rounded-md hover:bg-gray-50 transition-colors duration-200"
               >
-                Email Support
+                Gửi email hỗ trợ
               </a>
             </div>
           </div>

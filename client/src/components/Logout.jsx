@@ -13,7 +13,7 @@ const Logout = () => {
   };
   return (
     <Button onClick={handleLogout} className="px-8 py-2.5">
-      Logout
+      Đăng xuất
     </Button>
   );
 };

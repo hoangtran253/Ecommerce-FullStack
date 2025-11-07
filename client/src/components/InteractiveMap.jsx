@@ -88,7 +88,7 @@ const InteractiveMap = () => {
         {showDirections && (
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-sm font-medium text-gray-700 mb-3">
-              Get Directions:
+              Nhận chỉ đường:
             </p>
             <div className="flex flex-wrap gap-2">
               <button

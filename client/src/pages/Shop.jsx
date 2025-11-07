@@ -131,13 +131,13 @@ const Shop = () => {
       <div className="bg-gray-50 border-b border-gray-200">
         <Container className="py-4">
           <div className="flex flex-col space-y-2">
-            <h1 className="text-3xl font-bold text-gray-900">Shop</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Cửa hàng</h1>
             <nav className="flex text-sm text-gray-500">
               <a href="/" className="hover:text-gray-700 transition-colors">
-                Home
+                Trang chủ
               </a>
               <span className="mx-2">/</span>
-              <span className="text-gray-900">Shop</span>
+              <span className="text-gray-900">Cửa hàng</span>
             </nav>
           </div>
         </Container>
@@ -154,7 +154,7 @@ const Shop = () => {
                   onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
                   className="w-full flex items-center justify-between p-4 bg-gray-50 rounded-lg border hover:bg-gray-100 transition-colors"
                 >
-                  <span className="font-medium">Filters</span>
+                  <span className="font-medium">Bộ lọc</span>
                   <svg
                     className={`w-5 h-5 transform transition-transform duration-200 ${
                       mobileFiltersOpen ? "rotate-180" : ""
@@ -207,12 +207,12 @@ const Shop = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 p-4 bg-gray-50 rounded-lg border">
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600">
-                  Showing {(currentPage - 1) * itemsPerPage + 1}-
+                  Hiển thị {(currentPage - 1) * itemsPerPage + 1}-
                   {Math.min(
                     currentPage * itemsPerPage,
                     filteredProducts.length
                   )}{" "}
-                  of {filteredProducts.length} results
+                  trên {filteredProducts.length} kết quả
                 </span>
               </div>
 
@@ -220,7 +220,7 @@ const Shop = () => {
                 {/* Items per page */}
                 <div className="flex items-center gap-2">
                   <label htmlFor="perPage" className="text-sm text-gray-600">
-                    Show:
+                    Hiển thị:
                   </label>
                   <select
                     id="perPage"
@@ -237,7 +237,7 @@ const Shop = () => {
                 {/* Sort by */}
                 <div className="flex items-center gap-2">
                   <label htmlFor="sortBy" className="text-sm text-gray-600">
-                    Sort by:
+                    Sắp xếp:
                   </label>
                   <select
                     id="sortBy"
@@ -245,10 +245,10 @@ const Shop = () => {
                     onChange={(e) => setSortBy(e.target.value)}
                     className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   >
-                    <option value="newest">Newest</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="name">Name: A to Z</option>
+                    <option value="newest">Mới nhất</option>
+                    <option value="price-low">Giá: Thấp đến cao</option>
+                    <option value="price-high">Giá: Cao đến thấp</option>
+                    <option value="name">Tên: A → Z</option>
                   </select>
                 </div>
 
@@ -303,10 +303,10 @@ const Shop = () => {
             {/* Active Filters */}
             {(filters.category || filters.brand || filters.search) && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span className="text-sm text-gray-600">Active filters:</span>
+                <span className="text-sm text-gray-600">Bộ lọc đang áp dụng:</span>
                 {filters.category && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-900 text-white text-sm rounded-full">
-                    Category: {filters.category}
+                    Danh mục: {filters.category}
                     <button
                       onClick={() => handleFilterChange({ category: "" })}
                       className="ml-1 hover:text-gray-300"
@@ -317,7 +317,7 @@ const Shop = () => {
                 )}
                 {filters.brand && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-900 text-white text-sm rounded-full">
-                    Brand: {filters.brand}
+                    Thương hiệu: {filters.brand}
                     <button
                       onClick={() => handleFilterChange({ brand: "" })}
                       className="ml-1 hover:text-gray-300"
@@ -328,7 +328,7 @@ const Shop = () => {
                 )}
                 {filters.search && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-900 text-white text-sm rounded-full">
-                    Search: {filters.search}
+                    Tìm kiếm: {filters.search}
                     <button
                       onClick={() => handleFilterChange({ search: "" })}
                       className="ml-1 hover:text-gray-300"
@@ -341,7 +341,7 @@ const Shop = () => {
                   onClick={clearFilters}
                   className="text-sm text-gray-600 hover:text-gray-900 underline"
                 >
-                  Clear all
+                  Xóa tất cả
                 </button>
               </div>
             )}

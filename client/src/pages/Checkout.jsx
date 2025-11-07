@@ -38,12 +38,12 @@ const Checkout = () => {
       if (data.success) {
         setOrder(data.order);
       } else {
-        toast.error("Order not found");
+        toast.error("Không tìm thấy đơn hàng");
         navigate("/orders");
       }
     } catch (error) {
       console.error("Error fetching order:", error);
-      toast.error("Failed to load order details");
+      toast.error("Không thể tải thông tin đơn hàng");
       navigate("/orders");
     } finally {
       setLoading(false);
@@ -60,7 +60,7 @@ const Checkout = () => {
     if (paymentMethod === "stripe") {
       setPaymentStep("stripe");
     } else if (paymentMethod === "cod") {
-      toast.success("Order confirmed with Cash on Delivery");
+      toast.success("Đã xác nhận đơn hàng với hình thức thanh toán khi nhận hàng");
     }
   };
 
@@ -150,9 +150,9 @@ const Checkout = () => {
             <FaCheckCircle className="w-8 h-8 text-green-600" />
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Order Confirmation
+                Xác nhận đơn hàng
               </h1>
-              <p className="text-gray-600">Order ID: #{order._id}</p>
+              <p className="text-gray-600">Mã đơn hàng: #{order._id}</p>
             </div>
           </div>
         </Container>
@@ -165,39 +165,45 @@ const Checkout = () => {
             {/* Order Status */}
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Order Status
+                Trạng thái đơn hàng
               </h2>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium text-gray-700">
-                    Order Status:
+                    Trạng thái:
                   </span>
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
                       order.status
                     )}`}
                   >
-                    {order.status.charAt(0).toUpperCase() +
-                      order.status.slice(1)}
+                    {order.status === 'pending' ? 'Chờ xử lý' :
+                     order.status === 'confirmed' ? 'Đã xác nhận' :
+                     order.status === 'shipped' ? 'Đang giao hàng' :
+                     order.status === 'delivered' ? 'Đã giao hàng' :
+                     order.status === 'cancelled' ? 'Đã hủy' :
+                     order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium text-gray-700">
-                    Payment:
+                    Thanh toán:
                   </span>
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getPaymentStatusColor(
                       order.paymentStatus
                     )}`}
                   >
-                    {order.paymentStatus.charAt(0).toUpperCase() +
-                      order.paymentStatus.slice(1)}
+                    {order.paymentStatus === 'pending' ? 'Chờ thanh toán' :
+                     order.paymentStatus === 'paid' ? 'Đã thanh toán' :
+                     order.paymentStatus === 'failed' ? 'Thất bại' :
+                     order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1)}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <FaClock className="w-4 h-4 text-gray-500" />
                   <span className="text-sm text-gray-600">
-                    Placed on {new Date(order.date).toLocaleDateString()}
+                    Đặt ngày {new Date(order.date).toLocaleDateString()}
                   </span>
                 </div>
               </div>
@@ -207,7 +213,7 @@ const Checkout = () => {
             <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
               <div className="p-6 border-b border-gray-200">
                 <h2 className="text-xl font-semibold text-gray-900">
-                  Order Items
+                  Sản phẩm đặt mua
                 </h2>
               </div>
               <div className="divide-y divide-gray-200">
@@ -227,7 +233,7 @@ const Checkout = () => {
                         {item.name}
                       </h3>
                       <p className="text-sm text-gray-600">
-                        Quantity: {item.quantity}
+                        Số lượng: {item.quantity}
                       </p>
                     </div>
                     <div className="text-right">
@@ -235,7 +241,7 @@ const Checkout = () => {
                         <PriceFormat amount={item.price} />
                       </div>
                       <div className="text-sm text-gray-600">
-                        Total:{" "}
+                        Tổng:{" "}
                         <PriceFormat amount={item.price * item.quantity} />
                       </div>
                     </div>
@@ -248,7 +254,7 @@ const Checkout = () => {
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <FaMapMarkerAlt className="w-5 h-5" />
-                Delivery Address
+                Địa chỉ giao hàng
               </h2>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -286,25 +292,25 @@ const Checkout = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                Payment
+                Thanh toán
               </h2>
 
               {/* Order Summary */}
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
                 <div className="flex justify-between">
                   <span className="text-gray-600">
-                    Subtotal ({order.items.length} items)
+                    Tạm tính ({order.items.length} sản phẩm)
                   </span>
                   <span className="font-medium">
                     <PriceFormat amount={order.amount} />
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium text-green-600">Free</span>
+                  <span className="text-gray-600">Phí vận chuyển</span>
+                  <span className="font-medium text-green-600">Miễn phí</span>
                 </div>
                 <div className="flex justify-between text-lg font-semibold">
-                  <span className="text-gray-900">Total</span>
+                  <span className="text-gray-900">Tổng cộng</span>
                   <span className="text-gray-900">
                     <PriceFormat amount={order.amount} />
                   </span>
@@ -317,7 +323,7 @@ const Checkout = () => {
                   {paymentStep === "selection" && (
                     <>
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                        Choose Payment Method
+                        Chọn phương thức thanh toán
                       </h3>
 
                       {order.paymentMethod === "cod" ? (
@@ -327,10 +333,10 @@ const Checkout = () => {
                               <FaMoneyBillWave className="w-6 h-6 text-green-600" />
                               <div>
                                 <h4 className="font-semibold text-green-800">
-                                  Cash on Delivery
+                                  Thanh toán khi nhận hàng
                                 </h4>
                                 <p className="text-sm text-green-700">
-                                  Pay when your order is delivered
+                                  Thanh toán khi đơn hàng được giao đến
                                 </p>
                               </div>
                             </div>
@@ -341,7 +347,7 @@ const Checkout = () => {
                             className="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                           >
                             <FaCreditCard className="w-5 h-5" />
-                            Pay Online Now
+                            Thanh toán online ngay
                           </button>
                         </div>
                       ) : (
@@ -351,7 +357,7 @@ const Checkout = () => {
                             className="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                           >
                             <FaCreditCard className="w-5 h-5" />
-                            Pay with Card
+                            Thanh toán bằng thẻ
                           </button>
 
                           <button
@@ -359,7 +365,7 @@ const Checkout = () => {
                             className="w-full flex items-center justify-center gap-3 bg-gray-100 text-gray-900 py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium"
                           >
                             <FaMoneyBillWave className="w-5 h-5" />
-                            Cash on Delivery
+                            Thanh toán khi nhận hàng
                           </button>
                         </>
                       )}
@@ -391,23 +397,21 @@ const Checkout = () => {
                 </div>
               )}
 
-              {order.paymentStatus === "paid" && (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <FaCheckCircle className="w-6 h-6 text-green-600" />
-                    <div>
-                      <h4 className="font-semibold text-green-800">
-                        Payment Completed
-                      </h4>
-                      <p className="text-sm text-green-700">
-                        Your payment has been processed successfully
-                      </p>
+                {order.paymentStatus === "paid" && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <FaCheckCircle className="w-6 h-6 text-green-600" />
+                      <div>
+                        <h4 className="font-semibold text-green-800">
+                          Đã hoàn tất thanh toán
+                        </h4>
+                        <p className="text-sm text-green-700">
+                          Thanh toán của bạn đã được xử lý thành công
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-
-              <div className="mt-6 pt-6 border-t border-gray-200">
+                )}              <div className="mt-6 pt-6 border-t border-gray-200">
                 <button
                   onClick={() => navigate("/orders")}
                   className="w-full bg-gray-100 text-gray-900 py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium"

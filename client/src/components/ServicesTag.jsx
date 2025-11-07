@@ -10,66 +10,66 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const services = [
   {
-    title: "Free Delivery",
-    subtitle: "Free shipping on all orders over $50",
+    title: "Giao hàng miễn phí",
+    subtitle: "Miễn phí vận chuyển cho đơn hàng từ 50$ trở lên",
     icon: <TbTruckDelivery />,
     details: {
       description:
-        "Enjoy free standard shipping on all orders over $50. We partner with reliable courier services to ensure your products reach you safely and on time.",
+        "Tận hưởng dịch vụ giao hàng tiêu chuẩn miễn phí cho mọi đơn hàng có giá trị từ 50$ trở lên. Chúng tôi hợp tác với các đơn vị vận chuyển uy tín để đảm bảo sản phẩm đến tay bạn an toàn và đúng hẹn.",
       features: [
-        "Free shipping on orders $50+",
-        "Standard delivery: 3-5 business days",
-        "Express delivery available",
-        "Real-time tracking",
-        "Secure packaging",
+        "Miễn phí vận chuyển cho đơn từ 50$",
+        "Giao hàng tiêu chuẩn: 3-5 ngày làm việc",
+        "Có tùy chọn giao nhanh",
+        "Theo dõi đơn hàng theo thời gian thực",
+        "Đóng gói an toàn",
       ],
     },
   },
   {
-    title: "Easy Returns",
-    subtitle: "30-day return guarantee",
+    title: "Đổi trả dễ dàng",
+    subtitle: "Chính sách hoàn trả trong 30 ngày",
     icon: <HiOutlineCurrencyDollar />,
     details: {
       description:
-        "Not satisfied with your purchase? No problem! Our hassle-free return policy allows you to return any item within 30 days of purchase.",
+        "Không hài lòng với sản phẩm? Đừng lo! Chính sách đổi trả linh hoạt của chúng tôi cho phép bạn hoàn trả bất kỳ sản phẩm nào trong vòng 30 ngày kể từ ngày mua.",
       features: [
-        "30-day return window",
-        "Full refund guarantee",
-        "Free return shipping",
-        "Easy online return process",
-        "No restocking fees",
+        "Thời hạn hoàn trả 30 ngày",
+        "Hoàn tiền 100%",
+        "Miễn phí phí vận chuyển hoàn hàng",
+        "Quy trình đổi trả trực tuyến dễ dàng",
+        "Không tính phí xử lý",
       ],
     },
   },
   {
-    title: "24/7 Support",
-    subtitle: "Expert support anytime",
+    title: "Hỗ trợ 24/7",
+    subtitle: "Đội ngũ chuyên viên luôn sẵn sàng",
     icon: <BiSupport />,
     details: {
       description:
-        "Our dedicated customer support team is available 24/7 to assist you with any questions, concerns, or issues you may have.",
+        "Đội ngũ hỗ trợ khách hàng tận tâm của chúng tôi luôn sẵn sàng phục vụ bạn 24/7 — bất kể thời gian nào — để giải đáp thắc mắc, hỗ trợ đơn hàng hoặc hướng dẫn sử dụng sản phẩm.",
       features: [
-        "Round-the-clock availability",
-        "Live chat support",
-        "Email and phone support",
-        "Expert product guidance",
-        "Order tracking assistance",
+        "Hỗ trợ 24/7",
+        "Trò chuyện trực tiếp",
+        "Hỗ trợ qua email và điện thoại",
+        "Tư vấn sản phẩm chuyên sâu",
+        "Theo dõi đơn hàng nhanh chóng",
       ],
     },
   },
   {
-    title: "Secure Payment",
-    subtitle: "100% secure transactions",
+    title: "Thanh toán an toàn",
+    subtitle: "100% giao dịch bảo mật",
     icon: <MdOutlinePayment />,
     details: {
       description:
-        "Shop with confidence knowing that all your transactions are protected by industry-leading security measures and encryption technology.",
+        "Mua sắm an tâm với hệ thống thanh toán bảo mật cao cấp — tất cả giao dịch đều được mã hóa và tuân thủ tiêu chuẩn bảo mật quốc tế.",
       features: [
-        "SSL encryption",
-        "Multiple payment options",
-        "Fraud protection",
-        "PCI DSS compliance",
-        "Secure checkout process",
+        "Mã hóa SSL an toàn",
+        "Nhiều hình thức thanh toán",
+        "Bảo vệ chống gian lận",
+        "Tuân thủ chuẩn PCI DSS",
+        "Quy trình thanh toán bảo mật",
       ],
     },
   },
@@ -132,7 +132,7 @@ const ServicesTag = () => {
               className="bg-white rounded-2xl max-w-md w-full p-6 relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
+              {/* Nút đóng */}
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -140,7 +140,7 @@ const ServicesTag = () => {
                 <MdClose className="w-5 h-5 text-gray-500" />
               </button>
 
-              {/* Modal Header */}
+              {/* Tiêu đề Modal */}
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center mr-4">
                   <span className="text-xl text-white">
@@ -157,14 +157,14 @@ const ServicesTag = () => {
                 </div>
               </div>
 
-              {/* Modal Content */}
+              {/* Nội dung Modal */}
               <div className="mb-6">
                 <p className="text-gray-700 leading-relaxed mb-4">
                   {selectedService.details.description}
                 </p>
 
                 <h4 className="font-semibold text-gray-900 mb-3">
-                  Key Features:
+                  Các tính năng chính:
                 </h4>
                 <ul className="space-y-2">
                   {selectedService.details.features.map((feature, index) => (
@@ -179,17 +179,17 @@ const ServicesTag = () => {
                 </ul>
               </div>
 
-              {/* Modal Actions */}
+              {/* Nút hành động */}
               <div className="flex gap-3">
                 <button
                   onClick={closeModal}
                   className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
                 >
-                  Close
+                  Đóng
                 </button>
                 <Link to="/shop" className="flex-1" onClick={closeModal}>
                   <button className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium">
-                    Shop Now
+                    Mua sắm ngay
                   </button>
                 </Link>
               </div>

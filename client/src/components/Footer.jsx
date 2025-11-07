@@ -37,8 +37,8 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Orebi</h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Discover premium quality products with exceptional service. Your
-              trusted shopping destination for modern lifestyle essentials.
+              Khám phá những sản phẩm chất lượng cao cấp với dịch vụ vượt trội.
+Điểm đến mua sắm đáng tin cậy của bạn cho những nhu cầu thiết yếu của cuộc sống hiện đại.
             </p>
             <SocialLinks
               className="text-gray-400 hover:text-gray-900"
@@ -57,7 +57,7 @@ const Footer = () => {
                   href="/about"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  About Us
+                  Giới thiệu về chúng tôi
                 </a>
               </li>
               <li>
@@ -73,7 +73,7 @@ const Footer = () => {
                   href="/contact"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Contact
+                  Đánh giá
                 </a>
               </li>
               <li>
@@ -89,7 +89,7 @@ const Footer = () => {
                   href="/faq"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  FAQ
+                  Câu hỏi thường gặp
                 </a>
               </li>
             </ul>
@@ -98,7 +98,7 @@ const Footer = () => {
           {/* Categories */}
           <div>
             <h4 className="text-lg font-semibold text-gray-900 mb-6">
-              Categories
+              Danh mục
             </h4>
             <ul className="space-y-3">
               <li>
@@ -106,7 +106,7 @@ const Footer = () => {
                   href="/shop?category=Electronics"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Electronics
+                  Điện tử
                 </a>
               </li>
               <li>
@@ -114,7 +114,7 @@ const Footer = () => {
                   href="/shop?category=Fashion"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Fashion
+                  Thời trang
                 </a>
               </li>
               <li>
@@ -122,7 +122,7 @@ const Footer = () => {
                   href="/shop?category=Home & Garden"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Home & Garden
+                  Nhà & Vườn
                 </a>
               </li>
               <li>
@@ -130,7 +130,7 @@ const Footer = () => {
                   href="/shop?category=Sports"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Sports
+                  Thể thao
                 </a>
               </li>
               <li>
@@ -138,7 +138,7 @@ const Footer = () => {
                   href="/shop?category=Beauty"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm"
                 >
-                  Beauty
+                  Sắc đẹp
                 </a>
               </li>
             </ul>
@@ -147,10 +147,10 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h4 className="text-lg font-semibold text-gray-900 mb-6">
-              Stay Updated
+              Cập nhật thông tin
             </h4>
             <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-              Subscribe to get updates on new products and exclusive offers.
+              Đăng ký để nhận thông tin cập nhật về sản phẩm mới và ưu đãi độc quyền.
             </p>
 
             {subscription ? (
@@ -160,7 +160,7 @@ const Footer = () => {
                 className="p-4 bg-green-50 border border-green-200 rounded-lg"
               >
                 <p className="text-green-700 text-sm font-medium">
-                  ✓ Successfully subscribed!
+                  ✓ Đã đăng ký thành công! Cảm ơn bạn đã tham gia cùng chúng tôi.
                 </p>
               </motion.div>
             ) : (
@@ -183,7 +183,7 @@ const Footer = () => {
                   onClick={handleSubscription}
                   className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg transition-colors duration-200"
                 >
-                  Subscribe
+                  Đăng ký
                 </Button>
               </div>
             )}
@@ -200,7 +200,7 @@ const Footer = () => {
 
             {/* Payment Methods */}
             <div className="flex items-center gap-4">
-              <span className="text-gray-500 text-sm">We accept:</span>
+              <span className="text-gray-500 text-sm">Chúng tôi chấp nhận:</span>
               <img
                 src={paymentCard}
                 alt="Payment methods"

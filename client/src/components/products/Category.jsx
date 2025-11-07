@@ -31,7 +31,7 @@ const Category = () => {
   ];
   return (
     <div className="w-full">
-      <NavTitle>Shop by Category</NavTitle>
+      <NavTitle>Mua sắm theo danh mục</NavTitle>
       <div>
         <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
           {items.map(({ _id, title, icons }) => (

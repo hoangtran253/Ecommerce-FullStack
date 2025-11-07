@@ -27,7 +27,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const confirmPaymentAndFetchOrder = async () => {
       if (!orderId || !paymentIntentId) {
-        toast.error("Invalid payment confirmation");
+        toast.error("Xác nhận thanh toán không hợp lệ");
         navigate("/orders");
         return;
       }
@@ -54,14 +54,14 @@ const PaymentSuccess = () => {
         const confirmData = await confirmResponse.json();
         if (confirmData.success) {
           setOrder(confirmData.order);
-          toast.success("Payment confirmed successfully!");
+          toast.success("Xác nhận thanh toán thành công!");
         } else {
-          toast.error(confirmData.message || "Payment confirmation failed");
+          toast.error(confirmData.message || "Xác nhận thanh toán thất bại");
           navigate("/orders");
         }
       } catch (error) {
         console.error("Payment confirmation error:", error);
-        toast.error("Failed to confirm payment");
+        toast.error("Không thể xác nhận thanh toán");
         navigate("/orders");
       } finally {
         setLoading(false);
@@ -79,8 +79,8 @@ const PaymentSuccess = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Order Confirmation - ${order._id}`,
-          text: `My order for $${order.amount} has been confirmed!`,
+          title: `Xác nhận đơn hàng - ${order._id}`,
+          text: `Đơn hàng ${order.amount}₫ của tôi đã được xác nhận!`,
           url: window.location.href,
         });
       } catch (error) {
@@ -89,7 +89,7 @@ const PaymentSuccess = () => {
     } else {
       // Fallback: copy to clipboard
       navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
+      toast.success("Đã sao chép liên kết!");
     }
   };
 
@@ -98,7 +98,7 @@ const PaymentSuccess = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Confirming your payment...</p>
+          <p className="text-gray-600">Đang xác nhận thanh toán...</p>
         </div>
       </div>
     );
@@ -109,16 +109,16 @@ const PaymentSuccess = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Order Not Found
+            Không tìm thấy đơn hàng
           </h2>
           <p className="text-gray-600 mb-4">
-            Unable to confirm your payment. Please contact support.
+            Không thể xác nhận thanh toán của bạn. Vui lòng liên hệ hỗ trợ.
           </p>
           <Link
             to="/orders"
             className="bg-gray-900 text-white px-6 py-2 rounded-md hover:bg-gray-800 transition-colors"
           >
-            View Orders
+            Xem đơn hàng
           </Link>
         </div>
       </div>
@@ -144,12 +144,12 @@ const PaymentSuccess = () => {
             >
               <FaCheckCircle className="w-12 h-12 text-green-600" />
             </motion.div>
-            <h1 className="text-4xl font-bold mb-4">Payment Successful!</h1>
-            <p className="text-xl opacity-90 mb-2">
-              Thank you for your purchase
-            </p>
-            <p className="text-lg opacity-80">
-              Order #{order._id.slice(-8).toUpperCase()}
+              <h1 className="text-4xl font-bold mb-4">Thanh toán thành công!</h1>
+              <p className="text-xl opacity-90 mb-2">
+                Cảm ơn bạn đã mua hàng
+              </p>
+              <p className="text-lg opacity-80">
+                Đơn hàng #{order._id.slice(-8).toUpperCase()}
             </p>
           </motion.div>
         </Container>
@@ -170,7 +170,7 @@ const PaymentSuccess = () => {
             >
               <div className="text-center">
                 <FaHome className="w-6 h-6 text-gray-600 group-hover:text-blue-600 mx-auto mb-2 transition-colors" />
-                <span className="text-sm font-medium text-gray-900">Home</span>
+                <span className="text-sm font-medium text-gray-900">Trang chủ</span>
               </div>
             </Link>
 
@@ -181,7 +181,7 @@ const PaymentSuccess = () => {
               <div className="text-center">
                 <FaShoppingBag className="w-6 h-6 text-gray-600 group-hover:text-blue-600 mx-auto mb-2 transition-colors" />
                 <span className="text-sm font-medium text-gray-900">
-                  Shop More
+                  Mua sắm thêm
                 </span>
               </div>
             </Link>
@@ -193,7 +193,7 @@ const PaymentSuccess = () => {
               <div className="text-center">
                 <FaListAlt className="w-6 h-6 text-gray-600 group-hover:text-blue-600 mx-auto mb-2 transition-colors" />
                 <span className="text-sm font-medium text-gray-900">
-                  My Orders
+                  Đơn hàng của tôi
                 </span>
               </div>
             </Link>
@@ -204,7 +204,7 @@ const PaymentSuccess = () => {
             >
               <div className="text-center">
                 <FaPrint className="w-6 h-6 text-gray-600 group-hover:text-blue-600 mx-auto mb-2 transition-colors" />
-                <span className="text-sm font-medium text-gray-900">Print</span>
+                <span className="text-sm font-medium text-gray-900">In</span>
               </div>
             </button>
           </motion.div>
@@ -220,7 +220,7 @@ const PaymentSuccess = () => {
                 className="bg-white rounded-lg border border-gray-200 p-6"
               >
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                  Payment Details
+                  Chi tiết thanh toán
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-green-50 rounded-lg p-4">
@@ -228,10 +228,10 @@ const PaymentSuccess = () => {
                       <FaCheckCircle className="w-5 h-5 text-green-600" />
                       <div>
                         <div className="text-sm font-medium text-green-800">
-                          Payment Status
+                          Trạng thái thanh toán
                         </div>
                         <div className="text-lg font-bold text-green-900">
-                          PAID
+                          ĐÃ THANH TOÁN
                         </div>
                       </div>
                     </div>
@@ -241,10 +241,10 @@ const PaymentSuccess = () => {
                       <FaTruck className="w-5 h-5 text-blue-600" />
                       <div>
                         <div className="text-sm font-medium text-blue-800">
-                          Order Status
+                          Trạng thái đơn hàng
                         </div>
                         <div className="text-lg font-bold text-blue-900">
-                          CONFIRMED
+                          ĐÃ XÁC NHẬN
                         </div>
                       </div>
                     </div>
@@ -253,7 +253,7 @@ const PaymentSuccess = () => {
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <FaCalendarAlt className="w-4 h-4" />
-                    <span>Paid on {new Date().toLocaleDateString()}</span>
+                    <span>Đã thanh toán vào {new Date().toLocaleDateString()}</span>
                   </div>
                 </div>
               </motion.div>
@@ -267,7 +267,7 @@ const PaymentSuccess = () => {
               >
                 <div className="p-6 border-b border-gray-200">
                   <h2 className="text-xl font-semibold text-gray-900">
-                    Order Items
+                    Sản phẩm đã đặt
                   </h2>
                 </div>
                 <div className="divide-y divide-gray-200">
@@ -311,7 +311,7 @@ const PaymentSuccess = () => {
                 className="bg-blue-50 rounded-lg border border-blue-200 p-6"
               >
                 <h2 className="text-xl font-semibold text-blue-900 mb-4">
-                  What&apos;s Next?
+                  Các bước tiếp theo
                 </h2>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
@@ -320,11 +320,10 @@ const PaymentSuccess = () => {
                     </div>
                     <div>
                       <p className="font-medium text-blue-900">
-                        Order Confirmation
+                        Xác nhận đơn hàng
                       </p>
                       <p className="text-sm text-blue-700">
-                        You&apos;ll receive a confirmation email shortly with
-                        your order details.
+                        Bạn sẽ nhận được email xác nhận kèm theo chi tiết đơn hàng trong thời gian ngắn.
                       </p>
                     </div>
                   </div>
@@ -333,9 +332,9 @@ const PaymentSuccess = () => {
                       2
                     </div>
                     <div>
-                      <p className="font-medium text-blue-900">Processing</p>
+                      <p className="font-medium text-blue-900">Xử lý đơn hàng</p>
                       <p className="text-sm text-blue-700">
-                        We&apos;ll start processing your order within 24 hours.
+                        Chúng tôi sẽ bắt đầu xử lý đơn hàng của bạn trong vòng 24 giờ.
                       </p>
                     </div>
                   </div>
@@ -344,10 +343,9 @@ const PaymentSuccess = () => {
                       3
                     </div>
                     <div>
-                      <p className="font-medium text-blue-900">Shipping</p>
+                      <p className="font-medium text-blue-900">Vận chuyển</p>
                       <p className="text-sm text-blue-700">
-                        Track your order status in the &quot;My Orders&quot;
-                        section.
+                        Theo dõi trạng thái đơn hàng của bạn trong mục &quot;Đơn hàng của tôi&quot;.
                       </p>
                     </div>
                   </div>
@@ -364,28 +362,28 @@ const PaymentSuccess = () => {
             >
               <div className="bg-white rounded-lg border border-gray-200 p-6 sticky top-8">
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  Order Summary
+                  Tổng quan đơn hàng
                 </h2>
 
                 <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
                   <div className="flex justify-between">
                     <span className="text-gray-600">
-                      Subtotal ({order.items.length} items)
+                      Tạm tính ({order.items.length} sản phẩm)
                     </span>
                     <span className="font-medium">
                       <PriceFormat amount={order.amount} />
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="font-medium text-green-600">Free</span>
+                    <span className="text-gray-600">Phí vận chuyển</span>
+                    <span className="font-medium text-green-600">Miễn phí</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Tax</span>
-                    <span className="font-medium">$0.00</span>
+                    <span className="text-gray-600">Thuế</span>
+                    <span className="font-medium">0₫</span>
                   </div>
                   <div className="flex justify-between text-lg font-semibold">
-                    <span className="text-gray-900">Total Paid</span>
+                    <span className="text-gray-900">Tổng thanh toán</span>
                     <span className="text-green-600">
                       <PriceFormat amount={order.amount} />
                     </span>
@@ -398,7 +396,7 @@ const PaymentSuccess = () => {
                     className="w-full flex items-center justify-center gap-2 bg-gray-100 text-gray-900 py-3 px-4 rounded-lg hover:bg-gray-200 transition-colors font-medium"
                   >
                     <FaShare className="w-4 h-4" />
-                    Share Order
+                    Chia sẻ đơn hàng
                   </button>
 
                   <Link
@@ -406,7 +404,7 @@ const PaymentSuccess = () => {
                     className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                   >
                     <FaShoppingBag className="w-4 h-4" />
-                    Continue Shopping
+                    Tiếp tục mua sắm
                   </Link>
                 </div>
               </div>

@@ -142,7 +142,7 @@ const Pagination = ({
 
       {/* Jump to page */}
       <div className="flex items-center space-x-2 text-sm">
-        <span className="text-gray-600">Go to page:</span>
+        <span className="text-gray-600">Đi đến trang:</span>
         <input
           type="number"
           min="1"

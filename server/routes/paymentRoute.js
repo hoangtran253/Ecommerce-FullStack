@@ -1,32 +1,16 @@
 import express from "express";
 import {
-  createPaymentIntent,
-  confirmPayment,
-  handleStripeWebhook,
   createOrder,
+  processPayment,
+  getOrderStatus
 } from "../controllers/paymentController.js";
 import userAuth from "../middleware/userAuth.js";
 
 const router = express.Router();
 
-const routeValue = "/api/payment/";
-
-// Create order
+// Order routes
 router.post("/api/order/create", userAuth, createOrder);
-
-// Stripe payment routes
-router.post(
-  `${routeValue}stripe/create-payment-intent`,
-  userAuth,
-  createPaymentIntent
-);
-router.post(`${routeValue}stripe/confirm-payment`, userAuth, confirmPayment);
-
-// Stripe webhook (no auth required)
-router.post(
-  `${routeValue}stripe/webhook`,
-  express.raw({ type: "application/json" }),
-  handleStripeWebhook
-);
+router.post("/api/payment/process", userAuth, processPayment);
+router.get("/api/order/:orderId/status", userAuth, getOrderStatus);
 
 export default router;

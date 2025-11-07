@@ -21,10 +21,10 @@ const Wishlist = () => {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">
-                    My Wishlist
+                    Danh sách yêu thích
                   </h1>
                   <p className="text-gray-600">
-                    Save your favorite items for later
+                    Lưu lại những sản phẩm bạn thích
                   </p>
                 </div>
               </div>
@@ -33,7 +33,7 @@ const Wishlist = () => {
                 className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
               >
                 <FaArrowLeft />
-                Back to Profile
+                Quay lại hồ sơ
               </Link>
             </div>
           </motion.div>
@@ -49,18 +49,18 @@ const Wishlist = () => {
               <FaHeart className="text-4xl text-gray-400" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Your wishlist is empty
+              Danh sách yêu thích của bạn đang trống
             </h2>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
-              Start building your wishlist by adding items you love. You can
-              save items while browsing and come back to them later.
+              Hãy bắt đầu xây dựng danh sách yêu thích bằng cách thêm những sản phẩm bạn thích. 
+              Bạn có thể lưu sản phẩm trong lúc duyệt và quay lại xem sau.
             </p>
             <Link
               to="/shop"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
             >
               <FaShoppingBag />
-              Start Shopping
+              Bắt đầu mua sắm
             </Link>
           </motion.div>
 
@@ -76,10 +76,10 @@ const Wishlist = () => {
                 <FaHeart className="text-blue-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">
-                Save Favorites
+                Lưu yêu thích
               </h3>
               <p className="text-sm text-gray-600">
-                Keep track of items you love and want to purchase later
+                Theo dõi những sản phẩm bạn yêu thích và muốn mua sau
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 text-center">
@@ -87,20 +87,19 @@ const Wishlist = () => {
                 <FaShoppingBag className="text-green-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">
-                Quick Purchase
+                Mua nhanh chóng
               </h3>
               <p className="text-sm text-gray-600">
-                Easily move items from wishlist to cart when ready to buy
+                Dễ dàng chuyển sản phẩm từ danh sách yêu thích vào giỏ hàng khi muốn mua
               </p>
             </div>
             <div className="bg-white rounded-lg p-6 text-center">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <FaHeart className="text-purple-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Never Forget</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">Không bao giờ quên</h3>
               <p className="text-sm text-gray-600">
-                Your wishlist syncs across devices so you never lose your
-                favorites
+                Danh sách yêu thích của bạn được đồng bộ trên tất cả thiết bị để không bao giờ mất
               </p>
             </div>
           </motion.div>

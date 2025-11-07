@@ -110,7 +110,7 @@ const Cart = () => {
 
       const data = await response.json();
       if (data.success) {
-        toast.success("Address added successfully!");
+        toast.success("Đã thêm địa chỉ thành công!");
         fetchAddresses();
         setShowAddressModal(false);
         setAddressForm({
@@ -124,11 +124,11 @@ const Cart = () => {
           isDefault: false,
         });
       } else {
-        toast.error(data.message || "Failed to add address");
+        toast.error(data.message || "Thêm địa chỉ thất bại");
       }
     } catch (error) {
       console.error("Error adding address:", error);
-      toast.error("Failed to add address");
+      toast.error("Thêm địa chỉ thất bại");
     } finally {
       setIsAddingAddress(false);
     }
@@ -138,12 +138,12 @@ const Cart = () => {
     console.log("hello");
 
     if (!userInfo) {
-      toast.error("Please login to place an order");
+      toast.error("Vui lòng đăng nhập để đặt hàng");
       return;
     }
 
     if (!selectedAddress) {
-      toast.error("Please select a delivery address");
+      toast.error("Vui lòng chọn địa chỉ giao hàng");
       return;
     }
 
@@ -170,7 +170,7 @@ const Cart = () => {
 
       const data = await response.json();
       if (data.success) {
-        toast.success("Order placed successfully!");
+        toast.success("Đặt hàng thành công!");
         dispatch(resetCart());
         // Update order count
         dispatch(setOrderCount(orderCount + 1));
@@ -179,11 +179,11 @@ const Cart = () => {
       } else {
         console.log("error", data);
 
-        toast.error(data.message || "Failed to place order");
+        toast.error(data.message || "Đặt hàng thất bại");
       }
     } catch (error) {
       console.error("Error placing order:", error);
-      toast.error("Failed to place order");
+      toast.error("Đặt hàng thất bại");
     } finally {
       setIsPlacingOrder(false);
     }
@@ -208,13 +208,13 @@ const Cart = () => {
       <div className="bg-gray-50 border-b border-gray-200">
         <Container className="py-8">
           <div className="flex flex-col space-y-2">
-            <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Giỏ hàng</h1>
             <nav className="flex text-sm text-gray-500">
               <Link to="/" className="hover:text-gray-700 transition-colors">
-                Home
+                Trang chủ
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-gray-900">Cart</span>
+              <span className="text-gray-900">Giỏ hàng</span>
             </nav>
           </div>
         </Container>
@@ -228,10 +228,10 @@ const Cart = () => {
               <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
                 {/* Desktop Header */}
                 <div className="hidden lg:grid grid-cols-10 gap-4 p-6 bg-gray-50 border-b border-gray-200 text-sm font-semibold text-gray-700 uppercase">
-                  <div className="col-span-5">Product</div>
-                  <div className="col-span-2 text-center">Price</div>
-                  <div className="col-span-2 text-center">Quantity</div>
-                  <div className="col-span-1 text-center">Total</div>
+                  <div className="col-span-5">Sản phẩm</div>
+                  <div className="col-span-2 text-center">Giá</div>
+                  <div className="col-span-2 text-center">Số lượng</div>
+                  <div className="col-span-1 text-center">Tổng</div>
                 </div>
 
                 {/* Cart Items List */}
@@ -346,7 +346,7 @@ const Cart = () => {
                                 handleRemoveItem(item._id, item.name)
                               }
                               className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors"
-                              title="Remove item"
+                              title="Xóa sản phẩm"
                             >
                               <FaTrash className="w-4 h-4" />
                             </button>
@@ -382,12 +382,12 @@ const Cart = () => {
                               </Link>
                               {item?.brand && (
                                 <p className="text-sm text-gray-600 mb-1">
-                                  Brand: {item.brand}
+                                  Thương hiệu: {item.brand}
                                 </p>
                               )}
                               {item?.category && (
                                 <p className="text-sm text-gray-600">
-                                  Category: {item.category}
+                                  Danh mục: {item.category}
                                 </p>
                               )}
                             </div>
@@ -479,18 +479,18 @@ const Cart = () => {
               <div className="mt-6">
                 <div className="bg-white rounded-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Cart Actions
+                    Thao tác giỏ hàng
                   </h3>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => dispatch(resetCart())}
                       className="flex-1 px-4 py-3 border border-red-300 text-red-700 rounded-md hover:bg-red-50 hover:border-red-400 transition-colors font-medium"
                     >
-                      Clear Cart
+                      Xóa tất cả
                     </button>
                     <Link to="/shop" className="flex-1">
                       <button className="w-full px-4 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 hover:border-gray-400 transition-colors font-medium">
-                        Continue Shopping
+                        Tiếp tục mua sắm
                       </button>
                     </Link>
                   </div>
@@ -506,13 +506,13 @@ const Cart = () => {
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold text-gray-900">
-                        Delivery Address
+                        Địa chỉ giao hàng
                       </h3>
                       <button
                         onClick={() => setShowAddressModal(true)}
                         className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
-                        Add New
+                        Thêm mới
                       </button>
                     </div>
 
@@ -520,13 +520,13 @@ const Cart = () => {
                       <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                         <FaMapMarkerAlt className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                         <p className="text-gray-500 text-sm mb-2">
-                          No delivery address found
+                          Chưa có địa chỉ giao hàng
                         </p>
                         <button
                           onClick={() => setShowAddressModal(true)}
                           className="text-blue-600 hover:text-blue-700 font-medium text-sm"
                         >
-                          Add your first address
+                          Thêm địa chỉ đầu tiên
                         </button>
                       </div>
                     ) : (
@@ -668,13 +668,13 @@ const Cart = () => {
                 )}
 
                 <h3 className="text-lg font-semibold text-gray-900 mb-6">
-                  Order Summary
+                  Tổng quan đơn hàng
                 </h3>
 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between py-2">
                     <span className="text-gray-600">
-                      Subtotal ({products.length} items)
+                      Tạm tính ({products.length} sản phẩm)
                     </span>
                     <span className="font-medium">
                       <PriceFormat amount={totalAmt} />
@@ -683,7 +683,7 @@ const Cart = () => {
 
                   {totalAmt !== discount && (
                     <div className="flex justify-between py-2">
-                      <span className="text-gray-600">Discount</span>
+                      <span className="text-gray-600">Giảm giá</span>
                       <span className="font-medium text-green-600">
                         -<PriceFormat amount={totalAmt - discount} />
                       </span>
@@ -691,14 +691,14 @@ const Cart = () => {
                   )}
 
                   <div className="flex justify-between py-2">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="font-medium text-gray-900">Free</span>
+                    <span className="text-gray-600">Phí vận chuyển</span>
+                    <span className="font-medium text-gray-900">Miễn phí</span>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
                     <div className="flex justify-between">
                       <span className="text-lg font-semibold text-gray-900">
-                        Total
+                        Tổng cộng
                       </span>
                       <span className="text-lg font-semibold text-gray-900">
                         <PriceFormat amount={discount} />
@@ -713,21 +713,21 @@ const Cart = () => {
                   className="w-full bg-gray-900 text-white py-4 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {!userInfo ? (
-                    "Login to Place Order"
+                    "Đăng nhập để đặt hàng"
                   ) : !selectedAddress ? (
-                    "Select Address to Continue"
+                    "Chọn địa chỉ để tiếp tục"
                   ) : isPlacingOrder ? (
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Placing Order...
+                      Đang đặt hàng...
                     </div>
                   ) : (
-                    "Place Order"
+                    "Đặt hàng"
                   )}
                 </button>
 
                 <p className="text-sm text-gray-500 text-center mt-4">
-                  Shipping and taxes calculated at checkout
+                  Phí vận chuyển và thuế sẽ được tính khi thanh toán
                 </p>
               </div>
             </div>
@@ -746,15 +746,15 @@ const Cart = () => {
                 alt="Empty Cart"
               />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Your cart is empty
+                Giỏ hàng của bạn đang trống
               </h2>
               <p className="text-gray-600 mb-8">
-                Looks like you haven&apos;t added any items to your cart yet.
-                Start shopping to fill it up!
+                Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ hàng.
+                Hãy bắt đầu mua sắm ngay!
               </p>
               <Link to="/shop">
                 <button className="bg-gray-900 text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors font-medium">
-                  Start Shopping
+                  Bắt đầu mua sắm
                 </button>
               </Link>
             </div>
@@ -768,7 +768,7 @@ const Cart = () => {
           <div className="bg-white rounded-2xl max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-gray-900">
-                Add New Address
+                Thêm địa chỉ mới
               </h3>
               <button
                 onClick={() => setShowAddressModal(false)}
@@ -781,7 +781,7 @@ const Cart = () => {
             <form onSubmit={handleAddAddress} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Address Label *
+                  Loại địa chỉ *
                 </label>
                 <div className="relative">
                   <select
@@ -792,10 +792,10 @@ const Cart = () => {
                     className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white cursor-pointer"
                     required
                   >
-                    <option value="">Select address type</option>
-                    <option value="Home">Home</option>
-                    <option value="Work">Work</option>
-                    <option value="Hometown">Hometown</option>
+                    <option value="">Chọn loại địa chỉ</option>
+                    <option value="Home">Nhà riêng</option>
+                    <option value="Work">Cơ quan</option>
+                    <option value="Hometown">Quê nhà</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg
@@ -817,7 +817,7 @@ const Cart = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Street Address *
+                  Địa chỉ cụ thể *
                 </label>
                 <input
                   type="text"
@@ -825,7 +825,7 @@ const Cart = () => {
                   onChange={(e) =>
                     setAddressForm({ ...addressForm, street: e.target.value })
                   }
-                  placeholder="House number and street name"
+                  placeholder="Số nhà và tên đường"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required
                 />
@@ -834,7 +834,7 @@ const Cart = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    City *
+                    Thành phố *
                   </label>
                   <input
                     type="text"
@@ -848,7 +848,7 @@ const Cart = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    State *
+                    Tỉnh/Thành *
                   </label>
                   <input
                     type="text"
@@ -865,7 +865,7 @@ const Cart = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    ZIP Code *
+                    Mã bưu điện *
                   </label>
                   <input
                     type="text"
@@ -882,7 +882,7 @@ const Cart = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Country *
+                    Quốc gia *
                   </label>
                   <input
                     type="text"
@@ -893,7 +893,7 @@ const Cart = () => {
                         country: e.target.value,
                       })
                     }
-                    placeholder="e.g., United States"
+                    placeholder="Ví dụ: Việt Nam"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
@@ -902,7 +902,7 @@ const Cart = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
+                  Số điện thoại
                 </label>
                 <input
                   type="tel"
@@ -910,7 +910,7 @@ const Cart = () => {
                   onChange={(e) =>
                     setAddressForm({ ...addressForm, phone: e.target.value })
                   }
-                  placeholder="Optional"
+                  placeholder="Không bắt buộc"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -932,7 +932,7 @@ const Cart = () => {
                   htmlFor="isDefault"
                   className="ml-2 text-sm text-gray-700"
                 >
-                  Set as default address
+                  Đặt làm địa chỉ mặc định
                 </label>
               </div>
 
@@ -942,14 +942,14 @@ const Cart = () => {
                   onClick={() => setShowAddressModal(false)}
                   className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
                   disabled={isAddingAddress}
                   className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
                 >
-                  {isAddingAddress ? "Adding..." : "Add Address"}
+                  {isAddingAddress ? "Đang thêm..." : "Thêm địa chỉ"}
                 </button>
               </div>
             </form>

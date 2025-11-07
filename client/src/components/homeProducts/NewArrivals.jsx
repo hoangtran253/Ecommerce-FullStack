@@ -7,7 +7,7 @@ import ProductCard from "../ProductCard";
 import { getData } from "../../helpers";
 import { config } from "../../../config";
 
-const NewArrivals = () => {
+const SanPhamMoi = () => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -43,33 +43,33 @@ const NewArrivals = () => {
     ],
   };
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [sanPham, setSanPham] = useState([]);
+  const [dangTai, setDangTai] = useState(true);
   const endpoint = `${config?.baseUrl}/api/products?_type=new_arrivals`;
 
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
+    const laySanPham = async () => {
+      setDangTai(true);
       try {
         const data = await getData(endpoint);
-        // Handle the new API response format that includes success field
-        setProducts(data?.products || []);
+        // Xử lý định dạng phản hồi API mới có trường "success"
+        setSanPham(data?.products || []);
       } catch (error) {
-        console.error("Error fetching products:", error);
-        setProducts([]);
+        console.error("Lỗi khi tải sản phẩm:", error);
+        setSanPham([]);
       } finally {
-        setLoading(false);
+        setDangTai(false);
       }
     };
-    getProducts();
+    laySanPham();
   }, []);
 
-  // Render skeleton loading state
-  if (loading) {
+  // Giao diện khi đang tải (skeleton loading)
+  if (dangTai) {
     return (
       <div className="w-full py-10">
         <div className="flex items-center justify-between">
-          <Title className="text-2xl mb-3 font-bold">New Arrivals</Title>
+          <Title className="text-2xl mb-3 font-bold">Sản phẩm mới</Title>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -93,37 +93,37 @@ const NewArrivals = () => {
   return (
     <div className="w-full py-10">
       <div className="flex items-center justify-between">
-        <Title className="text-2xl mb-3 font-bold">New Arrivals</Title>
-        {/* <Link to={"/shop"}>See all</Link> */}
+        <Title className="text-2xl mb-3 font-bold">Sản phẩm mới</Title>
+        {/* <Link to={"/shop"}>Xem tất cả</Link> */}
       </div>
 
-      {/* Conditionally render slider or grid based on product count */}
-      {products && products.length > 3 ? (
-        // Use slider when more than 3 products
+      {/* Hiển thị slider hoặc grid tùy theo số lượng sản phẩm */}
+      {sanPham && sanPham.length > 3 ? (
+        // Dùng slider nếu có hơn 3 sản phẩm
         <Slider {...settings}>
-          {products?.map((item) => (
+          {sanPham?.map((item) => (
             <div key={item?._id} className="px-2">
               <ProductCard item={item} />
             </div>
           ))}
         </Slider>
       ) : (
-        // Use simple grid when 3 or fewer products
+        // Dùng grid nếu có 3 sản phẩm trở xuống
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products?.map((item) => (
+          {sanPham?.map((item) => (
             <ProductCard item={item} key={item?._id} />
           ))}
         </div>
       )}
 
-      {/* Show message when no products */}
-      {(!products || products.length === 0) && (
+      {/* Hiển thị thông báo khi không có sản phẩm */}
+      {(!sanPham || sanPham.length === 0) && (
         <div className="text-center py-8 text-gray-500">
-          <p>No new arrivals available at the moment.</p>
+          <p>Hiện chưa có sản phẩm mới nào.</p>
         </div>
       )}
     </div>
   );
 };
 
-export default NewArrivals;
+export default SanPhamMoi;

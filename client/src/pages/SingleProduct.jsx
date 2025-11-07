@@ -74,7 +74,7 @@ const SingleProduct = () => {
       <Container className="py-8">
         {/* Breadcrumbs */}
         <div className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-          <span className="hover:text-gray-700 cursor-pointer">Home</span>
+          <span className="hover:text-gray-700 cursor-pointer">Trang chủ</span>
           <span>/</span>
           <span className="hover:text-gray-700 cursor-pointer capitalize">
             {productInfo?.category}
@@ -112,7 +112,7 @@ const SingleProduct = () => {
               {!isImageZoomed && (
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
-                    Click to zoom
+                    Nhấn để phóng to
                   </div>
                 </div>
               )}
@@ -187,8 +187,8 @@ const SingleProduct = () => {
                 ))}
               </div>
               <span className="text-sm text-gray-600">
-                Rated {productInfo?.ratings?.toFixed(1) || "0.0"} out of 5 based
-                on {productInfo?.reviews?.length || 0} customer reviews
+                Đánh giá {productInfo?.ratings?.toFixed(1) || "0.0"} trên 5 từ
+                {productInfo?.reviews?.length || 0} đánh giá của khách hàng
               </span>
             </div>
 
@@ -201,7 +201,7 @@ const SingleProduct = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <label className="text-sm font-medium text-gray-900">
-                  Quantity:
+                  Số lượng:
                 </label>
                 <div className="flex items-center border border-gray-300 rounded-md">
                   <button
@@ -223,7 +223,7 @@ const SingleProduct = () => {
               </div>
 
               <button className="w-full bg-black text-white py-4 px-8 rounded-md hover:bg-gray-800 transition-all duration-300 font-medium uppercase tracking-wider transform hover:scale-[1.02] active:scale-[0.98]">
-                Add to Cart
+                Thêm vào giỏ
               </button>
             </div>
 
@@ -231,31 +231,31 @@ const SingleProduct = () => {
             <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
               <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
                 <MdFavoriteBorder className="w-5 h-5" />
-                Add to Wishlist
+                Thêm vào yêu thích
               </button>
               <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
                 <MdShare className="w-5 h-5" />
-                Share
+                Chia sẻ
               </button>
             </div>
 
             {/* Product Meta */}
             <div className="space-y-2 pt-4 border-t border-gray-200 text-sm">
               <p>
-                <span className="font-medium">SKU:</span>{" "}
+                <span className="font-medium">Mã SP:</span>{" "}
                 <span className="text-gray-600">
                   {productInfo?._id?.slice(-6) || "N/A"}
                 </span>
               </p>
               <p>
-                <span className="font-medium">Category:</span>{" "}
+                <span className="font-medium">Danh mục:</span>{" "}
                 <span className="text-gray-600 capitalize">
                   {productInfo?.category}
                 </span>
               </p>
               {productInfo?.tags && (
                 <p>
-                  <span className="font-medium">Tags:</span>{" "}
+                  <span className="font-medium">Thẻ:</span>{" "}
                   <span className="text-gray-600">{productInfo.tags}</span>
                 </p>
               )}
@@ -283,8 +283,8 @@ const SingleProduct = () => {
                 }`}
               >
                 {tab === "reviews"
-                  ? `Reviews (${productInfo?.reviews?.length || 0})`
-                  : tab}
+                  ? `Đánh giá (${productInfo?.reviews?.length || 0})`
+                  : tab === "description" ? "Mô tả" : tab}
               </button>
             ))}
           </div>
@@ -293,9 +293,9 @@ const SingleProduct = () => {
           <div className="min-h-[200px]">
             {activeTab === "description" && (
               <div className="prose prose-lg max-w-none">
-                <h3 className="text-2xl font-light mb-4">Description</h3>
+                <h3 className="text-2xl font-light mb-4">Mô tả sản phẩm</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  {productInfo?.description || "No description available."}
+                  {productInfo?.description || "Chưa có mô tả sản phẩm."}
                 </p>
                 <p className="text-gray-600 leading-relaxed mt-4">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
@@ -311,7 +311,7 @@ const SingleProduct = () => {
 
             {activeTab === "reviews" && (
               <div className="space-y-6">
-                <h3 className="text-2xl font-light mb-6">Customer Reviews</h3>
+                <h3 className="text-2xl font-light mb-6">Đánh giá của khách hàng</h3>
                 {productInfo?.reviews?.length > 0 ? (
                   <div className="space-y-6">
                     {productInfo.reviews.map((review, index) => (
@@ -355,7 +355,7 @@ const SingleProduct = () => {
                   </div>
                 ) : (
                   <p className="text-gray-500">
-                    No reviews yet. Be the first to leave a review!
+                    Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá sản phẩm này!
                   </p>
                 )}
               </div>
@@ -371,7 +371,7 @@ const SingleProduct = () => {
           className="border-t border-gray-200 pt-16 mt-16"
         >
           <h2 className="text-2xl font-light text-center mb-12">
-            Related Products
+            Sản phẩm tương tự
           </h2>
 
           {loadingRelated ? (
@@ -447,7 +447,7 @@ const SingleProduct = () => {
                     </span>
                     {product.discountedPercentage > 0 && (
                       <span className="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">
-                        {product.discountedPercentage}% off
+                        Giảm {product.discountedPercentage}%
                       </span>
                     )}
                   </div>
@@ -459,7 +459,7 @@ const SingleProduct = () => {
                       console.log("Add to cart:", product.name);
                     }}
                   >
-                    Add to Cart
+                    Thêm vào giỏ
                   </button>
                 </div>
               ))}
@@ -467,7 +467,7 @@ const SingleProduct = () => {
           ) : (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">
-                No related products found.
+                Không tìm thấy sản phẩm tương tự nào.
               </p>
             </div>
           )}

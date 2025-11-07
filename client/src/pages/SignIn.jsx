@@ -71,13 +71,13 @@ const SignIn = () => {
     setErrPassword("");
 
     if (!email) {
-      setErrEmail("Enter your email");
+      setErrEmail("Vui lòng nhập email");
       setIsLoading(false);
       return;
     }
 
     if (!password) {
-      setErrPassword("Enter your password");
+      setErrPassword("Vui lòng nhập mật khẩu");
       setIsLoading(false);
       return;
     }
@@ -126,10 +126,10 @@ const SignIn = () => {
                 <FaUserCircle className="text-2xl text-white" />
               </motion.div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Welcome Back
+                Chào mừng trở lại
               </h1>
               <p className="text-gray-600">
-                Sign in to your account to continue shopping
+                Đăng nhập để tiếp tục mua sắm
               </p>
             </div>
 
@@ -141,7 +141,7 @@ const SignIn = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Email Address
+                  Địa chỉ email
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -156,7 +156,7 @@ const SignIn = () => {
                     className={`block w-full pl-10 pr-3 py-3 border ${
                       errEmail ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors`}
-                    placeholder="Enter your email"
+                    placeholder="Nhập địa chỉ email của bạn"
                   />
                 </div>
                 {errEmail && (
@@ -177,7 +177,7 @@ const SignIn = () => {
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -192,7 +192,7 @@ const SignIn = () => {
                     className={`block w-full pl-10 pr-12 py-3 border ${
                       errPassword ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors`}
-                    placeholder="Enter your password"
+                    placeholder="Nhập mật khẩu của bạn"
                   />
                   <button
                     type="button"
@@ -224,7 +224,7 @@ const SignIn = () => {
                   to="#"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
                 >
-                  Forgot your password?
+                  Quên mật khẩu?
                 </Link>
               </div>
 
@@ -239,11 +239,11 @@ const SignIn = () => {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Signing In...
+                    Đang đăng nhập...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    Sign In
+                    Đăng nhập
                     <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 )}
@@ -258,7 +258,7 @@ const SignIn = () => {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 bg-white text-gray-500">
-                    Don&apos;t have an account?
+                    Chưa có tài khoản?
                   </span>
                 </div>
               </div>
@@ -270,7 +270,7 @@ const SignIn = () => {
                 to="/signup"
                 className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
-                Create new account
+                Tạo tài khoản mới
                 <FaArrowRight className="w-4 h-4" />
               </Link>
             </div>

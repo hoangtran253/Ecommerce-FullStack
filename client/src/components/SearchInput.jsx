@@ -77,7 +77,7 @@ const SearchInput = () => {
             <div className="p-6 text-center">
               <div className="inline-flex items-center gap-2 text-gray-600">
                 <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
-                <span>Searching...</span>
+                <span>Đang tìm kiếm...</span>
               </div>
             </div>
           ) : (
@@ -86,8 +86,8 @@ const SearchInput = () => {
                 <div className="max-h-80 overflow-y-auto">
                   <div className="p-3 bg-gray-50 border-b border-gray-100">
                     <p className="text-sm text-gray-600 font-medium">
-                      {filteredProducts.length} product
-                      {filteredProducts.length !== 1 ? "s" : ""} found
+                      {filteredProducts.length} sản phẩm
+                      {filteredProducts.length !== 1 ? "s" : ""} đã được tìm thấy
                     </p>
                   </div>
                   {filteredProducts?.map((item, index) => (
@@ -135,16 +135,16 @@ const SearchInput = () => {
                     <CiSearch className="text-2xl text-gray-400" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    No results found
+                    Không tìm thấy kết quả
                   </h3>
                   <p className="text-gray-600">
-                    No products match{" "}
+                    Không có sản phẩm nào phù hợp với từ khóa{" "}
                     <span className="font-semibold text-gray-900">
                       &ldquo;{search}&rdquo;
                     </span>
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    Try adjusting your search terms
+                    Hãy thử điều chỉnh các điều khoản tìm kiếm của bạn và thử lại.
                   </p>
                 </div>
               )}

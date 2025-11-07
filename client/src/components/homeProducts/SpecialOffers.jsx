@@ -69,7 +69,7 @@ const SpecialOffers = () => {
     return (
       <div className="w-full py-10">
         <div className="flex items-center justify-between">
-          <Title className="text-2xl mb-3 font-bold">Special Offers</Title>
+          <Title className="text-2xl mb-3 font-bold">Ưu đãi đặc biệt</Title>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -93,7 +93,7 @@ const SpecialOffers = () => {
   return (
     <div className="w-full py-10">
       <div className="flex items-center justify-between">
-        <Title className="text-2xl mb-3 font-bold">Special Offers</Title>
+        <Title className="text-2xl mb-3 font-bold">Ưu đãi đặc biệt</Title>
       </div>
 
       {/* Conditionally render slider or grid based on product count */}
@@ -118,7 +118,7 @@ const SpecialOffers = () => {
       {/* Show message when no products */}
       {(!products || products.length === 0) && (
         <div className="text-center py-8 text-gray-500">
-          <p>No special offers available at the moment.</p>
+          <p>Không có ưu đãi đặc biệt nào hiện có.</p>
         </div>
       )}
     </div>

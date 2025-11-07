@@ -64,7 +64,7 @@ const AddToCartButton = ({ item, className }) => {
           onClick={handleAddToCart}
           className="w-full border border-black text-black text-xs font-medium py-3 px-6 uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-200"
         >
-          Add to cart
+          Thêm vào giỏ hàng
         </button>
       )}
     </>

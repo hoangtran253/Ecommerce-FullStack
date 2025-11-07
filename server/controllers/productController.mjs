@@ -95,7 +95,8 @@ const addProduct = async (req, res) => {
       category,
       brand: brand ? brand : "",
       badge: badge === "true" ? true : false,
-      isAvailable: isAvailable === "true" ? true : false,
+      // Default to available unless explicitly set to "false"
+      isAvailable: typeof isAvailable === "undefined" ? true : isAvailable === "true",
       offer: offer === "true" ? true : false,
       description,
       tags: tags ? parsedTags : [],
@@ -103,11 +104,13 @@ const addProduct = async (req, res) => {
     };
 
     const product = new productModel(productData);
-    product.save();
+    // Ensure we wait for the DB write to complete before responding
+    await product.save();
 
     res.json({
       success: true,
-      message: `${name} added and save to DB successfully`,
+      message: `${name} added and saved to DB successfully`,
+      product,
     });
   } catch (error) {
     console.log(error);
@@ -154,9 +157,11 @@ const listProducts = async (req, res) => {
     // Build filter object for database query
     let filter = {};
 
-    // Filter by availability (only show available products by default)
-    if (isAvailable !== "false") {
-      filter.isAvailable = true;
+    // Filter by availability only if frontend explicitly provided the flag
+    // This avoids hiding products when the DB records don't have isAvailable set.
+    if (typeof isAvailable !== "undefined") {
+      // accept string values "true" or "false"
+      filter.isAvailable = isAvailable === "true";
     }
 
     // Filter by type

@@ -6,10 +6,10 @@ import { MdError } from "react-icons/md";
 
 const NotFound = () => {
   const popularLinks = [
-    { name: "Shop All Products", path: "/shop" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact Support", path: "/contact" },
-    { name: "My Account", path: "/signin" },
+    { name: "Tất cả sản phẩm", path: "/shop" },
+    { name: "Giới thiệu", path: "/about" },
+    { name: "Liên hệ hỗ trợ", path: "/contact" },
+    { name: "Tài khoản của tôi", path: "/signin" },
   ];
 
   return (
@@ -46,13 +46,13 @@ const NotFound = () => {
             className="mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Oops! Page Not Found
+              Ôi! Không tìm thấy trang
             </h1>
             <p className="text-xl text-gray-600 mb-2">
-              The page you&apos;re looking for seems to have wandered off.
+              Trang bạn đang tìm kiếm không tồn tại hoặc đã bị di chuyển.
             </p>
             <p className="text-gray-500">
-              Don&apos;t worry, even the best explorers get lost sometimes!
+              Đừng lo, hãy quay lại trang chủ hoặc sử dụng các liên kết bên dưới!
             </p>
           </motion.div>
 
@@ -66,13 +66,13 @@ const NotFound = () => {
             <Link to="/">
               <button className="flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors font-semibold">
                 <FaHome className="w-4 h-4" />
-                Go Home
+                Về trang chủ
               </button>
             </Link>
             <Link to="/shop">
               <button className="flex items-center gap-2 border border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
                 <FaSearch className="w-4 h-4" />
-                Browse Products
+                Xem sản phẩm
               </button>
             </Link>
             <button
@@ -80,7 +80,7 @@ const NotFound = () => {
               className="flex items-center gap-2 text-gray-600 px-8 py-4 rounded-lg hover:text-gray-800 transition-colors font-semibold"
             >
               <FaArrowLeft className="w-4 h-4" />
-              Go Back
+              Quay lại
             </button>
           </motion.div>
 
@@ -92,7 +92,7 @@ const NotFound = () => {
             className="border-t border-gray-200 pt-8"
           >
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
-              Popular Pages
+              Trang phổ biến
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {popularLinks.map((link, index) => (
@@ -118,8 +118,8 @@ const NotFound = () => {
           >
             <div className="text-4xl mb-4">🛍️</div>
             <p className="text-gray-600">
-              <strong>Did you know?</strong> While you&apos;re here, over 1000
-              customers are shopping on our site right now!
+              <strong>Bạn có biết?</strong> Ngay lúc này, có hơn 1000 khách hàng
+              đang mua sắm trên trang web của chúng tôi!
             </p>
           </motion.div>
         </div>

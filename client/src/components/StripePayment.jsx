@@ -103,7 +103,7 @@ const CheckoutForm = ({ orderId, amount, onSuccess, onCancel }) => {
       {/* Credit Card Design */}
       <div className="relative">
         <label className="block text-sm font-medium text-gray-700 mb-3">
-          Card Information
+          Thông tin thẻ
         </label>
 
         {/* Credit Card Container */}

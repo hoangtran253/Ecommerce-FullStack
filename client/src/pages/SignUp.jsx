@@ -67,7 +67,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (!checked) {
-      toast.error("Please accept the terms and conditions");
+      toast.error("Vui lòng đồng ý với điều khoản sử dụng");
       return;
     }
 
@@ -81,23 +81,23 @@ const SignUp = () => {
     let hasError = false;
 
     if (!clientName) {
-      setErrClientName("Enter your full name");
+      setErrClientName("Vui lòng nhập họ tên");
       hasError = true;
     }
 
     if (!email) {
-      setErrEmail("Enter your email");
+      setErrEmail("Vui lòng nhập email");
       hasError = true;
     } else if (!EmailValidation(email)) {
-      setErrEmail("Enter a valid email address");
+      setErrEmail("Email không hợp lệ");
       hasError = true;
     }
 
     if (!password) {
-      setErrPassword("Create a password");
+      setErrPassword("Vui lòng tạo mật khẩu");
       hasError = true;
     } else if (password.length < 6) {
-      setErrPassword("Password must be at least 6 characters");
+      setErrPassword("Mật khẩu phải có ít nhất 6 ký tự");
       hasError = true;
     }
 
@@ -149,10 +149,10 @@ const SignUp = () => {
                 <FaUserPlus className="text-2xl text-white" />
               </motion.div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Create Account
+                Tạo tài khoản
               </h1>
               <p className="text-gray-600">
-                Join Orebi Shopping and start your journey
+                Tham gia Orebi Shopping và bắt đầu hành trình của bạn
               </p>
             </div>
 
@@ -164,7 +164,7 @@ const SignUp = () => {
                   htmlFor="clientName"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Full Name
+                  Họ và tên
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -179,7 +179,7 @@ const SignUp = () => {
                     className={`block w-full pl-10 pr-3 py-3 border ${
                       errClientName ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors`}
-                    placeholder="Enter your full name"
+                    placeholder="Nhập họ và tên của bạn"
                   />
                 </div>
                 {errClientName && (
@@ -200,7 +200,7 @@ const SignUp = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Email Address
+                  Địa chỉ email
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -215,7 +215,7 @@ const SignUp = () => {
                     className={`block w-full pl-10 pr-3 py-3 border ${
                       errEmail ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors`}
-                    placeholder="Enter your email"
+                    placeholder="Nhập địa chỉ email của bạn"
                   />
                 </div>
                 {errEmail && (
@@ -236,7 +236,7 @@ const SignUp = () => {
                   htmlFor="password"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -251,7 +251,7 @@ const SignUp = () => {
                     className={`block w-full pl-10 pr-12 py-3 border ${
                       errPassword ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors`}
-                    placeholder="Create a strong password"
+                    placeholder="Tạo mật khẩu mạnh"
                   />
                   <button
                     type="button"
@@ -283,7 +283,7 @@ const SignUp = () => {
                   htmlFor="role"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Account Type
+                  Loại tài khoản
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -293,13 +293,13 @@ const SignUp = () => {
                     id="role"
                     name="role"
                     type="text"
-                    value="User Account"
+                    value="Tài khoản người dùng"
                     readOnly
                     className="block w-full pl-10 pr-3 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-600 cursor-not-allowed"
                   />
                 </div>
                 <p className="mt-1 text-xs text-gray-500">
-                  All new registrations are created as user accounts
+                  Tất cả tài khoản mới được tạo là tài khoản người dùng
                 </p>
               </div>
 
@@ -317,19 +317,19 @@ const SignUp = () => {
                 </div>
                 <div className="text-sm">
                   <label htmlFor="terms" className="text-gray-700">
-                    I agree to the{" "}
+                    Tôi đồng ý với{" "}
                     <Link
                       to="#"
                       className="text-gray-900 font-medium hover:underline"
                     >
-                      Terms of Service
+                      Điều khoản dịch vụ
                     </Link>{" "}
-                    and{" "}
+                    và{" "}
                     <Link
                       to="#"
                       className="text-gray-900 font-medium hover:underline"
                     >
-                      Privacy Policy
+                      Chính sách bảo mật
                     </Link>
                   </label>
                 </div>
@@ -350,11 +350,11 @@ const SignUp = () => {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Creating Account...
+                    Đang tạo tài khoản...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    Create Account
+                    Tạo tài khoản
                     <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 )}
@@ -369,7 +369,7 @@ const SignUp = () => {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 bg-white text-gray-500">
-                    Already have an account?
+                    Đã có tài khoản?
                   </span>
                 </div>
               </div>
@@ -381,7 +381,7 @@ const SignUp = () => {
                 to="/signin"
                 className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >
-                Sign in to your account
+                Đăng nhập vào tài khoản
                 <FaArrowRight className="w-4 h-4" />
               </Link>
             </div>

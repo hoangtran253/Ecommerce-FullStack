@@ -3,22 +3,22 @@ import PropTypes from "prop-types";
 import Pagination from "./Pagination";
 import ProductCard from "../ProductCard";
 
-const PaginationProductList = ({
+const DanhSachSanPhamPhanTrang = ({
   products = [],
   currentPage = 1,
   itemsPerPage = 12,
   onPageChange,
   viewMode = "grid",
 }) => {
-  const [paginatedProducts, setPaginatedProducts] = useState([]);
+  const [sanPhamHienThi, setSanPhamHienThi] = useState([]);
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    setPaginatedProducts(products.slice(startIndex, endIndex));
+    setSanPhamHienThi(products.slice(startIndex, endIndex));
   }, [products, currentPage, itemsPerPage]);
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const tongSoTrang = Math.ceil(products.length / itemsPerPage);
 
   if (products.length === 0) {
     return (
@@ -40,11 +40,11 @@ const PaginationProductList = ({
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No products found
+            Không tìm thấy sản phẩm nào
           </h3>
           <p className="text-gray-600 max-w-md">
-            We couldn&apos;t find any products matching your criteria. Try
-            adjusting your filters or search terms.
+            Chúng tôi không thể tìm thấy sản phẩm nào phù hợp với tiêu chí của bạn.
+            Hãy thử điều chỉnh bộ lọc hoặc từ khóa tìm kiếm.
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@ const PaginationProductList = ({
 
   return (
     <div className="w-full space-y-8">
-      {/* Products Grid/List */}
+      {/* Lưới / danh sách sản phẩm */}
       <div
         className={
           viewMode === "grid"
@@ -61,26 +61,26 @@ const PaginationProductList = ({
             : "grid grid-cols-1 gap-4"
         }
       >
-        {paginatedProducts.map((product) => (
+        {sanPhamHienThi.map((sanPham) => (
           <div
-            key={product._id}
+            key={sanPham._id}
             className={
               viewMode === "list"
-                ? "transform-none" // Override any transforms for list view
+                ? "transform-none" // Bỏ hiệu ứng transform trong chế độ danh sách
                 : ""
             }
           >
-            <ProductCard item={product} viewMode={viewMode} />
+            <ProductCard item={sanPham} viewMode={viewMode} />
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
+      {/* Phân trang */}
+      {tongSoTrang > 1 && (
         <div className="flex justify-center">
           <Pagination
             currentPage={currentPage}
-            totalPages={totalPages}
+            totalPages={tongSoTrang}
             onPageChange={onPageChange}
             itemsPerPage={itemsPerPage}
             totalItems={products.length}
@@ -90,7 +90,8 @@ const PaginationProductList = ({
     </div>
   );
 };
-PaginationProductList.propTypes = {
+
+DanhSachSanPhamPhanTrang.propTypes = {
   products: PropTypes.array.isRequired,
   currentPage: PropTypes.number,
   itemsPerPage: PropTypes.number,
@@ -98,4 +99,4 @@ PaginationProductList.propTypes = {
   viewMode: PropTypes.string,
 };
 
-export default PaginationProductList;
+export default DanhSachSanPhamPhanTrang;

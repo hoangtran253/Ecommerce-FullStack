@@ -52,10 +52,9 @@ const BestSellers = () => {
       setLoading(true);
       try {
         const data = await getData(endpoint);
-        // Handle the new API response format that includes success field
         setProducts(data?.products || []);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Lỗi khi lấy danh sách sản phẩm:", error);
         setProducts([]);
       } finally {
         setLoading(false);
@@ -64,12 +63,12 @@ const BestSellers = () => {
     getProducts();
   }, []);
 
-  // Render skeleton loading state
+  // Hiển thị trạng thái tải (loading)
   if (loading) {
     return (
       <div className="w-full py-10">
         <div className="flex items-center justify-between">
-          <Title className="text-2xl mb-3 font-bold">Our Bestsellers</Title>
+          <Title className="text-2xl mb-3 font-bold">Sản phẩm bán chạy</Title>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -93,13 +92,12 @@ const BestSellers = () => {
   return (
     <div className="w-full py-10">
       <div className="flex items-center justify-between">
-        <Title className="text-2xl mb-3 font-bold">Our Bestsellers</Title>
-        {/* <Link to={"/shop"}>See all</Link> */}
+        <Title className="text-2xl mb-3 font-bold">Sản phẩm bán chạy</Title>
+        {/* <Link to={"/shop"}>Xem tất cả</Link> */}
       </div>
 
-      {/* Conditionally render slider or grid based on product count */}
+      {/* Hiển thị slider nếu có nhiều hơn 3 sản phẩm */}
       {products && products.length > 3 ? (
-        // Use slider when more than 3 products
         <Slider {...settings}>
           {products?.map((item) => (
             <div key={item?._id} className="px-2">
@@ -108,7 +106,7 @@ const BestSellers = () => {
           ))}
         </Slider>
       ) : (
-        // Use simple grid when 3 or fewer products
+        // Hiển thị dạng lưới nếu có 3 hoặc ít hơn sản phẩm
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products?.map((item) => (
             <ProductCard item={item} key={item?._id} />
@@ -116,10 +114,10 @@ const BestSellers = () => {
         </div>
       )}
 
-      {/* Show message when no products */}
+      {/* Hiển thị thông báo khi không có sản phẩm */}
       {(!products || products.length === 0) && (
         <div className="text-center py-8 text-gray-500">
-          <p>No bestsellers available at the moment.</p>
+          <p>Hiện tại chưa có sản phẩm bán chạy nào.</p>
         </div>
       )}
     </div>

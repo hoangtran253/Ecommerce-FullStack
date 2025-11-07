@@ -54,7 +54,7 @@ const ProductCard = ({ item, viewMode = "grid", className = "" }) => {
             {item?.badge && (
               <div className="absolute top-3 right-3">
                 <span className="bg-green-600 text-white text-xs font-medium px-2 py-1 uppercase tracking-wide">
-                  New
+                  Mới
                 </span>
               </div>
             )}
@@ -77,13 +77,13 @@ const ProductCard = ({ item, viewMode = "grid", className = "" }) => {
 
               {item?.brand && (
                 <p className="text-sm text-gray-600 mb-2">
-                  Brand: {item.brand}
+                 Thương hiệu : {item.brand}
                 </p>
               )}
 
               {item?.category && (
                 <p className="text-sm text-gray-600 mb-3">
-                  Category: {item.category}
+                  Danh mục : {item.category}
                 </p>
               )}
 
@@ -143,7 +143,7 @@ const ProductCard = ({ item, viewMode = "grid", className = "" }) => {
         {item?.badge && (
           <div className="absolute top-3 right-3">
             <span className="bg-green-600 text-white text-xs font-medium px-2 py-1 uppercase tracking-wide">
-              New
+              Mới
             </span>
           </div>
         )}
@@ -159,7 +159,7 @@ const ProductCard = ({ item, viewMode = "grid", className = "" }) => {
               onClick={handleProductDetails}
               className="bg-white text-black px-6 py-2 text-sm font-medium uppercase tracking-wide hover:bg-gray-100 transition-colors duration-200"
             >
-              Quick Look
+              Xem chi tiết
             </button>
           </div>
         </div>
