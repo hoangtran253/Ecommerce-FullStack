@@ -200,7 +200,17 @@ const listProducts = async (req, res) => {
     }
 
     // Get database products
-    let dbProducts = await productModel.find(filter).sort({ createdAt: -1 });
+    let dbProducts;
+    if (_type === "new_arrivals") {
+      // Sort by createdAt descending for new arrivals
+      dbProducts = await productModel.find(filter).sort({ createdAt: -1 });
+    } else if (_type === "best_sellers") {
+      // Sort by soldQuantity descending for best sellers
+      dbProducts = await productModel.find(filter).sort({ soldQuantity: -1 });
+    } else {
+      // Default sort by createdAt descending
+      dbProducts = await productModel.find(filter).sort({ createdAt: -1 });
+    }
 
     // Format database products for frontend compatibility
     let formattedDbProducts = dbProducts.map((product) => ({

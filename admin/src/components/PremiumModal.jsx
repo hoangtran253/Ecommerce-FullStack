@@ -12,11 +12,11 @@ const PremiumModal = ({
   if (!isOpen) return null;
 
   const defaultFeatures = [
-    "Advanced order management",
-    "Detailed analytics & reports",
-    "Priority customer support",
-    "Custom branding options",
-    "API access and integrations",
+    "Quản lý đơn hàng nâng cao",
+"Phân tích & báo cáo chi tiết",
+"Hỗ trợ khách hàng ưu tiên",
+"Tùy chọn thương hiệu tùy chỉnh",
+"Truy cập và tích hợp API",
   ];
 
   const featureList = features.length > 0 ? features : defaultFeatures;
@@ -54,7 +54,7 @@ const PremiumModal = ({
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-4">
               <FaStar className="text-yellow-500" />
-              <h3 className="font-semibold text-gray-900">What you get:</h3>
+              <h3 className="font-semibold text-gray-900">Những gì bạn nhận được:</h3>
             </div>
 
             <ul className="space-y-3">
@@ -80,12 +80,12 @@ const PremiumModal = ({
               className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 w-full justify-center"
             >
               <FaCrown className="text-lg" />
-              <span>Unlock Premium</span>
+              <span>Mở khóa Premium</span>
               <HiSparkles className="text-lg" />
             </a>
 
             <p className="text-xs text-gray-500 mt-3">
-              One-time purchase • Instant access • Lifetime updates
+              Mua một lần • Truy cập ngay lập tức • Cập nhật trọn đời
             </p>
           </div>
         </div>

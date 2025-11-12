@@ -15,6 +15,17 @@ import {
   FaTags,
   FaBook,
   FaEnvelope,
+  FaTachometerAlt,
+  FaBoxOpen,
+  FaTags as FaTagsIcon,
+  FaUsers as FaUsersIcon,
+  FaShoppingCart,
+  FaChartBar,
+  FaBullhorn,
+  FaPercentage,
+  FaFileAlt,
+  FaCog,
+  FaQuestionCircle,
 } from "react-icons/fa";
 import { MdDashboard, MdAnalytics, MdInventory } from "react-icons/md";
 import { BiPackage } from "react-icons/bi";
@@ -36,95 +47,95 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    toast.success("Logged out successfully");
+    toast.success("Đăng xuất thành công");
     navigate("/login");
   };
 
   const sidebarItems = [
     {
-      title: "Overview",
+      title: "Tổng quan",
       icon: <MdDashboard />,
       path: "/",
-      description: "Dashboard overview",
+      description: "Tổng quan bảng điều khiển",
       badge: null,
     },
     {
-      title: "Analytics",
+      title: "Phân tích",
       icon: <MdAnalytics />,
       path: "/analytics",
-      description: "View analytics & insights",
-      badge: "New",
+      description: "Xem thống kê và thông tin chi tiết",
+      badge: "Mới",
     },
     {
-      title: "Products",
+      title: "Sản phẩm",
       icon: <BiPackage />,
       path: "#",
       isCategory: true,
       children: [
         {
-          title: "Add Product",
+          title: "Thêm sản phẩm",
           icon: <IoMdAdd />,
           path: "/add",
-          description: "Add new products",
+          description: "Thêm sản phẩm mới",
         },
         {
-          title: "Product List",
+          title: "Danh sách sản phẩm",
           icon: <FaList />,
           path: "/list",
-          description: "Manage all products",
+          description: "Quản lý tất cả sản phẩm",
         },
         {
-          title: "Inventory",
+          title: "Kho hàng",
           icon: <MdInventory />,
           path: "/inventory",
-          description: "Stock management",
+          description: "Quản lý tồn kho",
         },
         {
-          title: "Categories",
+          title: "Danh mục",
           icon: <FaTags />,
           path: "/categories",
-          description: "Manage categories",
+          description: "Quản lý danh mục",
         },
         {
-          title: "Brands",
+          title: "Thương hiệu",
           icon: <FaBox />,
           path: "/brands",
-          description: "Manage brands",
+          description: "Quản lý thương hiệu",
         },
       ],
     },
     {
-      title: "Orders",
+      title: "Đơn hàng",
       icon: <HiOutlineClipboardList />,
       path: "/orders",
-      description: "Manage customer orders",
+      description: "Quản lý đơn hàng khách hàng",
       badge: null,
     },
     {
-      title: "Users",
+      title: "Người dùng",
       icon: <FaUsers />,
       path: "/users",
-      description: "User management",
+      description: "Quản lý người dùng",
     },
     {
-      title: "Contacts",
+      title: "Liên hệ",
       icon: <FaEnvelope />,
       path: "/contacts",
-      description: "Customer messages & support",
+      description: "Tin nhắn & hỗ trợ khách hàng",
       badge: null,
     },
     {
-      title: "API Docs",
+      title: "Tài liệu API",
       icon: <FaBook />,
       path: "/api-docs",
-      description: "API documentation",
+      description: "Tài liệu hướng dẫn API",
       badge: "📚",
     },
     {
-      title: "Invoice",
+      title: "Hóa đơn",
       icon: <FaFileInvoice />,
       path: "/invoice",
-      description: "Generate & manage invoices",
+      description: "Tạo và quản lý hóa đơn",
     },
   ];
 
@@ -218,7 +229,7 @@ const Sidebar = () => {
             </h1>
             <p className="text-xs text-gray-500 flex items-center gap-1">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Dashboard Active
+              Bảng điều khiển đang hoạt động
             </p>
           </div>
         </div>
@@ -233,21 +244,6 @@ const Sidebar = () => {
 
       {/* Footer */}
       <div className="p-3 sm:p-4 border-t border-gray-100 bg-gray-50 flex-shrink-0">
-        {/* User Info */}
-        {/* {user && (
-          <div className="hidden sm:flex items-center gap-3 mb-3 p-2 bg-white rounded-lg">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center font-semibold text-xs">
-              {user?.name ? user.name.charAt(0).toUpperCase() : "A"}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
-                {user.name || user.email}
-              </p>
-              <p className="text-xs text-gray-500">Administrator</p>
-            </div>
-          </div>
-        )} */}
-
         {/* Logout Button */}
         <div className="mb-3">
           <button
@@ -255,7 +251,7 @@ const Sidebar = () => {
             className="w-full flex items-center justify-center sm:justify-start gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200 group"
           >
             <FaSignOutAlt className="text-sm sm:text-base group-hover:scale-110 transition-transform duration-200" />
-            <span className="hidden sm:inline font-medium">Logout</span>
+            <span className="hidden sm:inline font-medium">Đăng xuất</span>
           </button>
         </div>
 
@@ -264,7 +260,7 @@ const Sidebar = () => {
           <div className="hidden sm:block">
             <div className="flex items-center justify-center gap-2 mb-1">
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-              <span>System Healthy</span>
+              <span>Hệ thống hoạt động ổn định</span>
             </div>
             <p className="text-gray-500">© 2025 Orebi Admin v1.0.0</p>
           </div>

@@ -28,7 +28,7 @@ const LoginPage = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
+    // Xóa lỗi khi người dùng bắt đầu nhập
     if (error) {
       dispatch(clearError());
     }
@@ -40,10 +40,10 @@ const LoginPage = () => {
     dispatch(clearError());
 
     try {
-      // Try admin login first
+      // Thử đăng nhập với tư cách quản trị viên trước
       let response = await authService.adminLogin(formData);
 
-      // If admin login fails, try user login
+      // Nếu đăng nhập quản trị viên không thành công, hãy thử đăng nhập người dùng
       if (!response.success) {
         response = await authService.userLogin(formData);
       }
@@ -55,15 +55,15 @@ const LoginPage = () => {
             user: response.user || { email: formData.email },
           })
         );
-        toast.success(response.message || "Login successful!");
+        toast.success(response.message || "Đăng nhập thành công!");
         navigate("/");
       } else {
-        dispatch(setError(response.message || "Login failed"));
-        toast.error(response.message || "Login failed");
+        dispatch(setError(response.message || "Đăng nhập thất bại"));
+        toast.error(response.message || "Đăng nhập thất bại");
       }
     } catch (error) {
       const errorMessage =
-        error.response?.data?.message || error.message || "Login failed";
+        error.response?.data?.message || error.message || "Đăng nhập thất bại";
       dispatch(setError(errorMessage));
       toast.error(errorMessage);
     } finally {
@@ -74,18 +74,18 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo Section */}
+        {/* Phần Logo */}
         <div className="text-center mb-6">
           <div className="bg-white p-3 rounded-md shadow-lg inline-block mb-4 transform hover:scale-105 transition-transform duration-300">
             <img src={logo} alt="logo" className="w-20" />
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Welcome Back
+            Chào mừng trở lại
           </h1>
-          <p className="text-gray-600">Please sign in to your account</p>
+          <p className="text-gray-600">Vui lòng đăng nhập vào tài khoản của bạn</p>
         </div>
 
-        {/* Login Form */}
+        {/* Form Đăng nhập */}
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
           {error && (
             <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
@@ -96,13 +96,13 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700 block">
-                Email Address
+                Địa chỉ Email
               </label>
               <div className="relative">
                 <input
                   type="email"
                   name="email"
-                  placeholder="Enter your email"
+                  placeholder="Nhập email của bạn"
                   className="w-full py-3 px-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/70"
                   required
                   value={formData.email}
@@ -129,13 +129,13 @@ const LoginPage = () => {
 
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700 block">
-                Password
+                Mật khẩu
               </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder="Enter your password"
+                  placeholder="Nhập mật khẩu của bạn"
                   className="w-full py-3 px-4 pr-12 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm hover:bg-white/70"
                   required
                   value={formData.password}
@@ -214,39 +214,39 @@ const LoginPage = () => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Signing In...
+                  Đang đăng nhập...
                 </div>
               ) : (
-                "Sign In"
+                "Đăng nhập"
               )}
             </button>
           </form>
 
-          {/* Register Link */}
+          {/* Liên kết Đăng ký */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don&apos;t have an account?{" "}
+              Chưa có tài khoản?{" "}
               <Link
                 to="/register"
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
               >
-                Create Account
+                Tạo tài khoản
               </Link>
             </p>
           </div>
 
-          {/* Additional Elements */}
+          {/* Các phần tử bổ sung */}
           <div className="mt-4 text-center">
             <p className="text-xs text-gray-500">
-              Secure access • Protected by encryption
+              Truy cập bảo mật • Được bảo vệ bởi mã hóa
             </p>
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Chân trang */}
         <div className="text-center mt-6">
           <p className="text-sm text-gray-500">
-            © 2025 Admin Dashboard. All rights reserved.
+            © 2025 Bảng điều khiển Admin. Tất cả quyền được bảo lưu.
           </p>
         </div>
       </div>

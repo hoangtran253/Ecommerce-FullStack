@@ -10,7 +10,7 @@ const adminAuth = async (req, res, next) => {
         : req.headers.token;
 
     if (!token) {
-      return res.json({ success: false, message: "Not Authorized, try again" });
+      return res.status(401).json({ success: false, message: "Not authorized, token missing" });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -19,15 +19,15 @@ const adminAuth = async (req, res, next) => {
     const user = await userModel.findById(decoded.id);
 
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
     if (user.role !== "admin") {
-      return res.json({ success: false, message: "Admin access required" });
+      return res.status(403).json({ success: false, message: "Admin access required" });
     }
 
     if (!user.isActive) {
-      return res.json({ success: false, message: "Account is deactivated" });
+      return res.status(403).json({ success: false, message: "Account is deactivated" });
     }
 
     // Add user info to request object
@@ -35,7 +35,16 @@ const adminAuth = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Invalid token" });
+    // Handle expired token separately so client can react (e.g., request refresh or force re-login)
+    if (error && error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        success: false,
+        message: "Token expired",
+        expiredAt: error.expiredAt,
+      });
+    }
+
+    return res.status(401).json({ success: false, message: "Invalid token" });
   }
 };
 

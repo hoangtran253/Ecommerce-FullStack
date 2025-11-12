@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/orebiSlice";
 import Container from "../components/Container";
 import { MdStar, MdFavoriteBorder, MdShare } from "react-icons/md";
 import { motion } from "framer-motion";
 import { getData } from "../helpers/index";
 import { serverUrl } from "../../config";
+import toast from "react-hot-toast";
 
 const SingleProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [productInfo, setProductInfo] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState("description");
@@ -67,6 +71,11 @@ const SingleProduct = () => {
     } else if (type === "decrement" && quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...productInfo, quantity }));
+    toast.success(`${productInfo.name} đã được thêm vào giỏ hàng!`);
   };
 
   return (
@@ -222,7 +231,10 @@ const SingleProduct = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-4 px-8 rounded-md hover:bg-gray-800 transition-all duration-300 font-medium uppercase tracking-wider transform hover:scale-[1.02] active:scale-[0.98]">
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-black text-white py-4 px-8 rounded-md hover:bg-gray-800 transition-all duration-300 font-medium uppercase tracking-wider transform hover:scale-[1.02] active:scale-[0.98]"
+              >
                 Thêm vào giỏ
               </button>
             </div>

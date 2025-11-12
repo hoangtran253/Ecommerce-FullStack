@@ -1,16 +1,26 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { logo } from "../assets/images";
-import { FaUser, FaCog, FaChevronDown, FaUserShield } from "react-icons/fa";
+import { FaUser, FaCog, FaChevronDown, FaUserShield, FaSignOutAlt } from "react-icons/fa";
 import { MdNotifications, MdDashboard } from "react-icons/md";
+import { logout } from "../redux/authSlice";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const userMenuRef = useRef(null);
   const notificationRef = useRef(null);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Đăng xuất thành công!");
+    navigate("/login");
+  };
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -49,10 +59,12 @@ const Navbar = () => {
   ];
 
   const userMenuItems = [
-    { icon: FaUser, label: "Profile", path: "/profile" },
+    { icon: FaUser, label: "Hồ sơ", path: "/profile" },
     { icon: MdDashboard, label: "Dashboard", path: "/" },
-    { icon: FaCog, label: "Settings", path: "/settings" },
+    { icon: FaCog, label: "Cài đặt", path: "/settings" },
   ];
+
+  const logoutMenuItem = { icon: FaSignOutAlt, label: "Đăng xuất", onClick: handleLogout };
 
   return (
     <header className="border-b border-gray-200 w-full sticky top-0 left-0 z-40 bg-white shadow-sm">
@@ -96,9 +108,9 @@ const Navbar = () => {
             {isNotificationOpen && (
               <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
                 <div className="px-4 py-3 border-b border-gray-100">
-                  <h3 className="font-semibold text-gray-900">Notifications</h3>
+                  <h3 className="font-semibold text-gray-900">Thông báo</h3>
                   <p className="text-sm text-gray-500">
-                    {notifications.length} new notifications
+                    {notifications.length} thông báo mới
                   </p>
                 </div>
                 <div className="max-h-64 overflow-y-auto">
@@ -118,7 +130,7 @@ const Navbar = () => {
                 </div>
                 <div className="px-4 py-2 border-t border-gray-100">
                   <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                    View all notifications
+                    Xem tất cả thông báo
                   </button>
                 </div>
               </div>
@@ -135,7 +147,7 @@ const Navbar = () => {
                     <p className="font-semibold text-gray-900">
                       {user.name || user.email}
                     </p>
-                    <p className="text-xs text-gray-500">Administrator</p>
+                    <p className="text-xs text-gray-500">Quản trị viên</p>
                   </div>
                 </div>
 
@@ -195,6 +207,17 @@ const Navbar = () => {
                         {item.label}
                       </Link>
                     ))}
+                    <div className="border-t border-gray-100 my-1"></div>
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        logoutMenuItem.onClick();
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
+                    >
+                      <logoutMenuItem.icon className="text-red-400" />
+                      {logoutMenuItem.label}
+                    </button>
                   </div>
                 </div>
               )}

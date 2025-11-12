@@ -43,14 +43,14 @@ const Home = () => {
           loading: false,
         });
       } else {
-        throw new Error(response.data.message || "Failed to fetch stats");
+        throw new Error(response.data.message || "Không thể lấy số liệu thống kê");
       }
     } catch (error) {
-      console.error("Error fetching statistics:", error);
+      console.error("Lỗi khi lấy số liệu thống kê:", error);
       setStats((prev) => ({
         ...prev,
         loading: false,
-        error: error.message || "Failed to load dashboard data",
+        error: error.message || "Không thể tải dữ liệu bảng điều khiển",
       }));
     }
   }, [token]);
@@ -105,18 +105,31 @@ const Home = () => {
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("vi-VN", {
       style: "currency",
-      currency: "USD",
+      currency: "VND",
     }).format(amount);
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      month: "short",
+    return new Date(dateString).toLocaleDateString("vi-VN", {
       day: "numeric",
+      month: "short",
       year: "numeric",
     });
+  };
+
+  const formatStatus = (status) => {
+    switch (status) {
+      case "delivered":
+        return "Đã giao";
+      case "shipped":
+        return "Đã gửi";
+      case "pending":
+        return "Đang chờ";
+      default:
+        return status;
+    }
   };
 
   if (stats.loading) {
@@ -127,10 +140,9 @@ const Home = () => {
     return (
       <div className="space-y-8">
         <div>
-          <Title>Dashboard Overview</Title>
+          <Title>Tổng quan Bảng điều khiển</Title>
           <p className="text-gray-600 mt-2">
-            Welcome back! Here&apos;s what&apos;s happening with your store
-            today.
+            Chào mừng trở lại! Đây là những gì đang diễn ra với cửa hàng của bạn hôm nay.
           </p>
         </div>
 
@@ -151,14 +163,14 @@ const Home = () => {
             </svg>
           </div>
           <h3 className="text-xl font-semibold text-red-800 mb-2">
-            Unable to Load Dashboard Data
+            Không thể tải dữ liệu Bảng điều khiển
           </h3>
           <p className="text-red-600 mb-4">{stats.error}</p>
           <button
             onClick={fetchStatistics}
             className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
           >
-            Try Again
+            Thử lại
           </button>
         </div>
       </div>
@@ -169,16 +181,16 @@ const Home = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <Title>Dashboard Overview</Title>
+        <Title>Tổng quan Bảng điều khiển</Title>
         <p className="text-gray-600 mt-2">
-          Welcome back! Here&apos;s what&apos;s happening with your store today.
+          Chào mừng trở lại! Đây là những gì đang diễn ra với cửa hàng của bạn hôm nay.
         </p>
       </div>
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title="Total Products"
+          title="Tổng Sản phẩm"
           value={stats.totalProducts.toLocaleString()}
           change="+12%"
           changeType="positive"
@@ -201,7 +213,7 @@ const Home = () => {
         />
 
         <StatCard
-          title="Total Orders"
+          title="Tổng Đơn hàng"
           value={stats.totalOrders.toLocaleString()}
           change="+8%"
           changeType="positive"
@@ -224,7 +236,7 @@ const Home = () => {
         />
 
         <StatCard
-          title="Total Users"
+          title="Tổng Người dùng"
           value={stats.totalUsers.toLocaleString()}
           change="+15%"
           changeType="positive"
@@ -247,7 +259,7 @@ const Home = () => {
         />
 
         <StatCard
-          title="Total Revenue"
+          title="Tổng Doanh thu"
           value={formatCurrency(stats.totalRevenue)}
           change="+23%"
           changeType="positive"
@@ -275,9 +287,9 @@ const Home = () => {
         {/* Recent Orders */}
         <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-bold text-gray-800">Recent Orders</h3>
+            <h3 className="text-xl font-bold text-gray-800">Đơn hàng gần đây</h3>
             <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-              View All
+              Xem tất cả
             </button>
           </div>
 
@@ -290,12 +302,12 @@ const Home = () => {
                 >
                   <div>
                     <p className="font-semibold text-gray-800">
-                      Order #{order._id?.slice(-8) || "N/A"}
+                      Đơn hàng #{order._id?.slice(-8) || "N/A"}
                     </p>
                     <p className="text-sm text-gray-600">
                       {order.userId?.name ||
                         order.address?.firstName ||
-                        "Customer"}
+                        "Khách hàng"}
                     </p>
                     <p className="text-xs text-gray-500">
                       {formatDate(order.date)}
@@ -314,13 +326,13 @@ const Home = () => {
                           : "bg-yellow-100 text-yellow-800"
                       }`}
                     >
-                      {order.status || "pending"}
+                      {formatStatus(order.status) || "đang chờ"}
                     </span>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center py-8">No recent orders</p>
+              <p className="text-gray-500 text-center py-8">Không có đơn hàng gần đây</p>
             )}
           </div>
         </div>
@@ -329,10 +341,10 @@ const Home = () => {
         <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold text-gray-800">
-              Popular Products
+              Sản phẩm phổ biến
             </h3>
             <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-              View All
+              Xem tất cả
             </button>
           </div>
 
@@ -348,10 +360,10 @@ const Home = () => {
                   </div>
                   <div className="flex-1">
                     <p className="font-semibold text-gray-800">
-                      {product.name || "Product Name"}
+                      {product.name || "Tên sản phẩm"}
                     </p>
                     <p className="text-sm text-gray-600">
-                      {product.category || "Category"}
+                      {product.category || "Danh mục"}
                     </p>
                   </div>
                   <div className="text-right">
@@ -359,14 +371,14 @@ const Home = () => {
                       {formatCurrency(product.price || 0)}
                     </p>
                     <p className="text-sm text-gray-600">
-                      Stock: {product.stock || 0}
+                      Kho: {product.stock || 0}
                     </p>
                   </div>
                 </div>
               ))
             ) : (
               <p className="text-gray-500 text-center py-8">
-                No products available
+                Không có sản phẩm nào
               </p>
             )}
           </div>
@@ -375,7 +387,7 @@ const Home = () => {
 
       {/* Quick Actions */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-        <h3 className="text-2xl font-bold mb-4">Quick Actions</h3>
+        <h3 className="text-2xl font-bold mb-4">Hành động nhanh</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 rounded-xl p-4 text-left">
             <div className="flex items-center space-x-3">
@@ -392,7 +404,7 @@ const Home = () => {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              <span className="font-semibold">Add New Product</span>
+              <span className="font-semibold">Thêm sản phẩm mới</span>
             </div>
           </button>
 
@@ -411,7 +423,7 @@ const Home = () => {
                   d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
                 />
               </svg>
-              <span className="font-semibold">View Orders</span>
+              <span className="font-semibold">Xem đơn hàng</span>
             </div>
           </button>
 
@@ -430,7 +442,7 @@ const Home = () => {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <span className="font-semibold">Manage Users</span>
+              <span className="font-semibold">Quản lý người dùng</span>
             </div>
           </button>
         </div>

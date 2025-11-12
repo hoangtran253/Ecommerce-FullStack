@@ -23,18 +23,15 @@ const List = ({ token }) => {
   const [list, setList] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
   // Modal states
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [deletingProduct, setDeletingProduct] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-
   // Categories and brands for edit modal
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-
   // Edit form data
   const [formData, setFormData] = useState({
     _type: "",
@@ -50,19 +47,18 @@ const List = ({ token }) => {
     badge: false,
     tags: [],
   });
-
   const [imageFiles, setImageFiles] = useState({
     image1: null,
     image2: null,
     image3: null,
     image4: null,
   });
+
   const fetchList = async () => {
     try {
       setLoading(true);
       const response = await axios.get(serverUrl + "/api/product/list");
       const data = response?.data;
-
       if (data?.success) {
         setList(data?.products);
       } else {
@@ -83,10 +79,8 @@ const List = ({ token }) => {
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/category`),
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/brand`),
       ]);
-
       const categoriesData = await categoriesRes.json();
       const brandsData = await brandsRes.json();
-
       if (categoriesData.success) {
         setCategories(categoriesData.categories);
       }
@@ -223,21 +217,18 @@ const List = ({ token }) => {
   // Handle product update
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
-
     if (
       !formData.name ||
       !formData.description ||
       !formData.price ||
       !formData.category
     ) {
-      toast.error("Please fill in all required fields");
+      toast.error("Vui lòng điền đầy đủ các trường bắt buộc");
       return;
     }
-
     try {
       setSubmitting(true);
       const data = new FormData();
-
       // Append form fields
       data.append("_type", formData._type);
       data.append("name", formData.name);
@@ -251,7 +242,6 @@ const List = ({ token }) => {
       data.append("isAvailable", formData.isAvailable);
       data.append("badge", formData.badge);
       data.append("tags", JSON.stringify(formData.tags));
-
       // Append image files only if new images are selected
       Object.keys(imageFiles).forEach((key) => {
         if (imageFiles[key]) {
@@ -259,24 +249,24 @@ const List = ({ token }) => {
         }
       });
 
+      // ✅ SỬA: Gửi token đúng định dạng
       const response = await axios.put(
         `${serverUrl}/api/product/update/${editingProduct._id}`,
         data,
         {
           headers: {
-            token,
-            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`, // ✅ Thay từ 'token' sang 'Authorization: Bearer ...'
+            "Content-Type": "multipart/form-data", // FormData tự set, có thể bỏ dòng này
           },
         }
       );
-
       const responseData = response?.data;
       if (responseData?.success) {
-        toast.success("Product updated successfully");
+        toast.success("Cập nhật sản phẩm thành công");
         await fetchList();
         closeEditModal();
       } else {
-        toast.error(responseData?.message || "Failed to update product");
+        toast.error(responseData?.message || "Không thể cập nhật sản phẩm");
       }
     } catch (error) {
       console.log("Product update error", error);
@@ -288,13 +278,13 @@ const List = ({ token }) => {
 
   const handleRemoveProduct = async () => {
     if (!deletingProduct) return;
-
     try {
       setSubmitting(true);
+      // ✅ SỬA: Gửi token đúng định dạng
       const response = await axios.post(
         serverUrl + "/api/product/remove",
         { _id: deletingProduct._id },
-        { headers: { token } }
+        { headers: { Authorization: `Bearer ${token}` } } // ✅ Thay từ 'token' sang 'Authorization: Bearer ...'
       );
       const data = response?.data;
       if (data?.success) {
@@ -328,9 +318,9 @@ const List = ({ token }) => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Products
+              Sản phẩm
             </h1>
-            <p className="text-gray-600 mt-1">Manage your product inventory</p>
+            <p className="text-gray-600 mt-1">Quản lý kho sản phẩm của bạn</p>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -339,32 +329,30 @@ const List = ({ token }) => {
               title="Refresh Products"
             >
               <FaSync className="w-4 h-4" />
-              Refresh
+              Làm mới
             </button>
             <Link
               to="/add"
               className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
             >
               <FaPlus />
-              Add Product
+              Thêm sản phẩm
             </Link>
           </div>
         </div>
-
         {/* Search and Filter */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder="Tìm kiếm sản phẩm..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
             />
           </div>
         </div>
-
         {/* Products List */}
         {isLoading ? (
           <>
@@ -375,22 +363,22 @@ const List = ({ token }) => {
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Image
+                        Hình ảnh
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Product
+                        Sản phẩm
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Category
+                        Danh mục
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Price
+                        Giá
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Stock
+                        Tồn kho
                       </th>
                       <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
+                        Hành động
                       </th>
                     </tr>
                   </thead>
@@ -424,7 +412,6 @@ const List = ({ token }) => {
                 </table>
               </div>
             </div>
-
             {/* Mobile Cards Skeleton */}
             <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[...Array(6)].map((_, index) => (
@@ -452,19 +439,19 @@ const List = ({ token }) => {
           <div className="text-center py-12">
             <FaBox className="mx-auto text-6xl text-gray-300 mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
-              {searchTerm ? "No products found" : "No products yet"}
+              {searchTerm ? "Không tìm thấy sản phẩm" : "Chưa có sản phẩm"}
             </h3>
             <p className="text-gray-500 mb-6">
               {searchTerm
-                ? "Try adjusting your search terms"
-                : "Start by adding your first product"}
+                ? "Hãy thử điều chỉnh từ khóa tìm kiếm"
+                : "Bắt đầu bằng cách thêm sản phẩm đầu tiên"}
             </p>
             {!searchTerm && (
               <Link
                 to="/add"
                 className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
               >
-                Add Product
+                Thêm sản phẩm
               </Link>
             )}
           </div>
@@ -477,22 +464,22 @@ const List = ({ token }) => {
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Image
+                        Hình ảnh
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Product
+                        Sản phẩm
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Category
+                        Danh mục
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Price
+                        Giá
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Stock
+                        Tồn kho
                       </th>
                       <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
+                        Hành động
                       </th>
                     </tr>
                   </thead>
@@ -542,7 +529,7 @@ const List = ({ token }) => {
                                 : "text-red-600"
                             }`}
                           >
-                            {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                            {product.stock > 0 ? "Còn hàng" : "Hết hàng"}
                           </div>
                         </td>
                         <td className="px-6 py-4 text-right">
@@ -552,14 +539,14 @@ const List = ({ token }) => {
                               className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors"
                             >
                               <FaEdit />
-                              Edit
+                              Chỉnh sửa
                             </button>
                             <button
                               onClick={() => openDeleteModal(product)}
                               className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-50 text-red-600 rounded hover:bg-red-100 transition-colors"
                             >
                               <FaTrash />
-                              Delete
+                              Xóa
                             </button>
                           </div>
                         </td>
@@ -569,7 +556,6 @@ const List = ({ token }) => {
                 </table>
               </div>
             </div>
-
             {/* Mobile Card View */}
             <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredList.map((product) => (
@@ -610,7 +596,7 @@ const List = ({ token }) => {
                         </div>
                         <div className="text-right">
                           <div className="text-sm text-gray-900">
-                            Stock: {product.stock || 0}
+                            Tồn kho: {product.stock || 0}
                           </div>
                           <div
                             className={`text-xs ${
@@ -619,7 +605,7 @@ const List = ({ token }) => {
                                 : "text-red-600"
                             }`}
                           >
-                            {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                            {product.stock > 0 ? "Còn hàng" : "Hết hàng"}
                           </div>
                         </div>
                       </div>
@@ -629,14 +615,14 @@ const List = ({ token }) => {
                           className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors"
                         >
                           <FaEdit />
-                          Edit
+                          Chỉnh sửa
                         </button>
                         <button
                           onClick={() => openDeleteModal(product)}
                           className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-50 text-red-600 rounded hover:bg-red-100 transition-colors"
                         >
                           <FaTrash />
-                          Delete
+                          Xóa
                         </button>
                       </div>
                     </div>
@@ -646,7 +632,6 @@ const List = ({ token }) => {
             </div>
           </>
         )}
-
         {/* Edit Modal */}
         {showEditModal && (
           <div
@@ -667,7 +652,6 @@ const List = ({ token }) => {
                   <IoMdClose size={24} />
                 </button>
               </div>
-
               <form onSubmit={handleUpdateProduct} className="p-6 space-y-6">
                 {/* Image Upload Section */}
                 <div className="space-y-4">
@@ -736,7 +720,6 @@ const List = ({ token }) => {
                     )}
                   </div>
                 </div>
-
                 {/* Basic Information */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="lg:col-span-2">
@@ -750,7 +733,6 @@ const List = ({ token }) => {
                       required
                     />
                   </div>
-
                   <div className="lg:col-span-2">
                     <Label htmlFor="description">Description *</Label>
                     <textarea
@@ -762,7 +744,6 @@ const List = ({ token }) => {
                       required
                     />
                   </div>
-
                   <div>
                     <Label htmlFor="brand">Brand</Label>
                     <select
@@ -779,7 +760,6 @@ const List = ({ token }) => {
                       ))}
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="category">Category *</Label>
                     <select
@@ -798,7 +778,6 @@ const List = ({ token }) => {
                     </select>
                   </div>
                 </div>
-
                 {/* Pricing & Stock */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="flex flex-col">
@@ -814,7 +793,6 @@ const List = ({ token }) => {
                       required
                     />
                   </div>
-
                   <div className="flex flex-col">
                     <Label htmlFor="discountedPercentage">Discount %</Label>
                     <Input
@@ -827,7 +805,6 @@ const List = ({ token }) => {
                       className="mt-1"
                     />
                   </div>
-
                   <div className="flex flex-col">
                     <Label htmlFor="stock">Stock *</Label>
                     <Input
@@ -841,7 +818,6 @@ const List = ({ token }) => {
                     />
                   </div>
                 </div>
-
                 {/* Settings */}
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   <div>
@@ -859,7 +835,6 @@ const List = ({ token }) => {
                       <option value="promotions">Promotions</option>
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="isAvailable">Availability</Label>
                     <select
@@ -872,7 +847,6 @@ const List = ({ token }) => {
                       <option value="false">Out of Stock</option>
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="offer">Special Offer</Label>
                     <select
@@ -885,7 +859,6 @@ const List = ({ token }) => {
                       <option value="true">Yes</option>
                     </select>
                   </div>
-
                   <div>
                     <Label htmlFor="badge">Show Badge</Label>
                     <select
@@ -899,7 +872,6 @@ const List = ({ token }) => {
                     </select>
                   </div>
                 </div>
-
                 {/* Tags */}
                 <div>
                   <Label>Tags</Label>
@@ -942,7 +914,6 @@ const List = ({ token }) => {
                     ))}
                   </div>
                 </div>
-
                 <div className="flex gap-3 pt-4 border-t">
                   <button
                     type="button"
@@ -970,7 +941,6 @@ const List = ({ token }) => {
             </div>
           </div>
         )}
-
         {/* Delete Modal */}
         {showDeleteModal && (
           <div
@@ -996,7 +966,6 @@ const List = ({ token }) => {
                     </p>
                   </div>
                 </div>
-
                 {deletingProduct && (
                   <div className="bg-gray-50 rounded-lg p-4 mb-6">
                     <div className="flex items-center gap-3">
@@ -1016,12 +985,10 @@ const List = ({ token }) => {
                     </div>
                   </div>
                 )}
-
                 <p className="text-gray-600 mb-6">
                   Are you sure you want to delete this product? This will
                   permanently remove it from your inventory.
                 </p>
-
                 <div className="flex gap-3">
                   <button
                     type="button"

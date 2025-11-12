@@ -44,34 +44,30 @@ const NewUserForm = ({
         }
       } catch (error) {
         console.log("Fetch addresses error", error);
-        // Don't show error toast here as it's just for UI enhancement
       }
     },
     [token]
   );
+
   useEffect(() => {
-    // If a user is selected, pre-fill the form with their details
     if (selectedUser) {
       setFormData({
         _id: selectedUser?._id || null,
         name: selectedUser.name || "",
         email: selectedUser.email || "",
-        password: "", // Leave password empty for security
+        password: "",
         role: selectedUser.role || "user",
         isActive:
           selectedUser.isActive !== undefined ? selectedUser.isActive : true,
         avatar: selectedUser.avatar || "",
       });
 
-      // Set avatar preview if user has avatar
       setAvatarPreview(selectedUser.avatar || "");
 
-      // Fetch user addresses for address management
       if (selectedUser._id) {
         fetchUserAddresses(selectedUser._id);
       }
     } else {
-      // Reset form data when no user is selected
       setFormData({
         name: "",
         email: "",
@@ -90,19 +86,17 @@ const NewUserForm = ({
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        // 5MB limit
-        toast.error("File size must be less than 5MB");
+        toast.error("Kích thước ảnh phải nhỏ hơn 5MB");
         return;
       }
 
       if (!file.type.startsWith("image/")) {
-        toast.error("Please select an image file");
+        toast.error("Vui lòng chọn tệp hình ảnh");
         return;
       }
 
       setAvatarFile(file);
 
-      // Create preview URL
       const reader = new FileReader();
       reader.onloadend = () => {
         setAvatarPreview(reader.result);
@@ -137,7 +131,7 @@ const NewUserForm = ({
       }
     } catch (error) {
       console.log("Avatar upload error", error);
-      toast.error("Failed to upload avatar");
+      toast.error("Tải ảnh đại diện thất bại");
       return null;
     }
   };
@@ -146,14 +140,13 @@ const NewUserForm = ({
     e.preventDefault();
 
     if (isReadOnly) {
-      toast.error("Cannot edit user - Read only mode");
+      toast.error("Không thể chỉnh sửa - Chế độ chỉ đọc");
       return;
     }
 
     try {
       let avatarUrl = formData.avatar;
 
-      // Upload avatar if new file is selected
       if (avatarFile) {
         const uploadedUrl = await uploadAvatar();
         if (uploadedUrl) {
@@ -170,7 +163,6 @@ const NewUserForm = ({
         avatar: avatarUrl,
       };
 
-      // Only include password if it's provided
       if (formData.password) {
         userData.password = formData.password;
       }
@@ -200,7 +192,7 @@ const NewUserForm = ({
       }
     } catch (error) {
       console.log("User save error", error);
-      toast.error(error?.response?.data?.message || "An error occurred");
+      toast.error(error?.response?.data?.message || "Đã xảy ra lỗi");
     }
   };
 
@@ -219,13 +211,11 @@ const NewUserForm = ({
       className="relative z-[9999] focus:outline-none"
       onClose={close}
     >
-      {/* Background overlay */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm"
         aria-hidden="true"
       />
 
-      {/* Modal container */}
       <div className="fixed inset-0 z-[10000] w-screen overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-2 sm:p-4 lg:p-6">
           <DialogPanel
@@ -237,34 +227,32 @@ const NewUserForm = ({
                      transform transition-all duration-300 ease-out
                      data-[closed]:scale-95 data-[closed]:opacity-0"
           >
-            {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
               <DialogTitle
                 as="h3"
                 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 pr-2"
               >
                 {isReadOnly
-                  ? "👤 User Details"
+                  ? "👤 Thông tin người dùng"
                   : selectedUser
-                  ? "✏️ Edit User"
-                  : "➕ Add New User"}
+                  ? "✏️ Chỉnh sửa người dùng"
+                  : "➕ Thêm người dùng mới"}
               </DialogTitle>
               <button
                 onClick={() => setIsOpen(false)}
                 className="self-end sm:self-auto text-gray-400 hover:text-gray-600 hover:bg-gray-100 
                          transition-colors p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300"
-                aria-label="Close modal"
+                aria-label="Đóng modal"
               >
                 <MdClose className="text-xl sm:text-2xl" />
               </button>
             </div>
 
-            {/* Read-only notification */}
             {isReadOnly && (
               <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <p className="text-sm text-blue-800">
-                  ℹ️ This is a read-only view. Only administrators can edit user
-                  information.
+                  ℹ️ Đây là chế độ chỉ đọc. Chỉ quản trị viên mới có thể chỉnh
+                  sửa thông tin người dùng.
                 </p>
               </div>
             )}
@@ -273,21 +261,21 @@ const NewUserForm = ({
               onSubmit={handleAddOrUpdateUser}
               className="space-y-4 sm:space-y-6"
             >
-              {/* Basic Information */}
+              {/* Thông tin cơ bản */}
               <div className="space-y-3 sm:space-y-4">
                 <h4 className="text-base sm:text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
                   <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                  Basic Information
+                  Thông tin cơ bản
                 </h4>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <Label htmlFor="name">Full Name *</Label>
+                    <Label htmlFor="name">Họ và tên *</Label>
                     <Input
                       id="name"
                       type="text"
                       name="name"
-                      placeholder="Enter full name"
+                      placeholder="Nhập họ và tên"
                       onChange={handleChange}
                       value={formData.name}
                       required
@@ -296,12 +284,12 @@ const NewUserForm = ({
                     />
                   </div>
                   <div>
-                    <Label htmlFor="email">Email Address *</Label>
+                    <Label htmlFor="email">Địa chỉ Email *</Label>
                     <Input
                       id="email"
                       type="email"
                       name="email"
-                      placeholder="Enter email address"
+                      placeholder="Nhập email"
                       onChange={handleChange}
                       value={formData.email}
                       required
@@ -313,7 +301,7 @@ const NewUserForm = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="role">User Role</Label>
+                    <Label htmlFor="role">Vai trò</Label>
                     <select
                       id="role"
                       name="role"
@@ -324,12 +312,12 @@ const NewUserForm = ({
                         isReadOnly ? "bg-gray-50" : ""
                       }`}
                     >
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
+                      <option value="user">Người dùng</option>
+                      <option value="admin">Quản trị viên</option>
                     </select>
                   </div>
                   <div>
-                    <Label htmlFor="isActive">Account Status</Label>
+                    <Label htmlFor="isActive">Trạng thái tài khoản</Label>
                     <select
                       id="isActive"
                       name="isActive"
@@ -345,21 +333,23 @@ const NewUserForm = ({
                         isReadOnly ? "bg-gray-50" : ""
                       }`}
                     >
-                      <option value="true">Active</option>
-                      <option value="false">Inactive</option>
+                      <option value="true">Hoạt động</option>
+                      <option value="false">Ngưng hoạt động</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <Label htmlFor="password">
-                    {selectedUser ? "New Password (optional)" : "Password *"}
+                    {selectedUser
+                      ? "Mật khẩu mới (tuỳ chọn)"
+                      : "Mật khẩu *"}
                   </Label>
                   <Input
                     id="password"
                     type="password"
                     name="password"
-                    placeholder="Enter password"
+                    placeholder="Nhập mật khẩu"
                     onChange={handleChange}
                     value={formData.password}
                     required={!selectedUser}
@@ -368,11 +358,10 @@ const NewUserForm = ({
                   />
                 </div>
 
-                {/* Avatar Upload */}
+                {/* Ảnh đại diện */}
                 <div className="space-y-3">
-                  <Label>Profile Avatar</Label>
+                  <Label>Ảnh đại diện</Label>
                   <div className="flex items-center gap-4">
-                    {/* Avatar Preview */}
                     <div className="relative">
                       {avatarPreview || formData.avatar ? (
                         <img
@@ -389,7 +378,6 @@ const NewUserForm = ({
                       )}
                     </div>
 
-                    {/* Upload Button */}
                     {!isReadOnly && (
                       <div className="flex-1">
                         <input
@@ -417,10 +405,10 @@ const NewUserForm = ({
                               d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                             />
                           </svg>
-                          {avatarFile ? "Change Image" : "Upload Image"}
+                          {avatarFile ? "Thay ảnh" : "Tải ảnh lên"}
                         </label>
                         <p className="text-xs text-gray-500 mt-1">
-                          PNG, JPG up to 5MB
+                          PNG, JPG tối đa 5MB
                         </p>
                       </div>
                     )}
@@ -428,12 +416,12 @@ const NewUserForm = ({
                 </div>
               </div>
 
-              {/* Address Information */}
+              {/* Quản lý địa chỉ */}
               <div className="space-y-4 sm:space-y-6">
                 <div className="flex items-center justify-between">
                   <h4 className="text-base sm:text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2 flex items-center gap-2">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                    Address Management
+                    Quản lý địa chỉ
                   </h4>
                   {selectedUser && (
                     <button
@@ -444,16 +432,15 @@ const NewUserForm = ({
                       disabled={isReadOnly}
                     >
                       <MdLocationOn className="text-base" />
-                      Manage Addresses ({userAddresses.length})
+                      Quản lý ({userAddresses.length})
                     </button>
                   )}
                 </div>
 
-                {/* Address Summary for existing users */}
                 {selectedUser && userAddresses.length > 0 && (
                   <div className="bg-gray-50 rounded-lg p-4">
                     <h5 className="text-sm font-medium text-gray-700 mb-3">
-                      Current Addresses:
+                      Danh sách địa chỉ:
                     </h5>
                     <div className="space-y-2">
                       {userAddresses.slice(0, 2).map((addr, index) => (
@@ -477,14 +464,14 @@ const NewUserForm = ({
                           </div>
                           {addr.isDefault && (
                             <span className="text-xs text-blue-600 font-medium">
-                              Default
+                              Mặc định
                             </span>
                           )}
                         </div>
                       ))}
                       {userAddresses.length > 2 && (
                         <p className="text-xs text-gray-500">
-                          +{userAddresses.length - 2} more addresses
+                          +{userAddresses.length - 2} địa chỉ khác
                         </p>
                       )}
                     </div>
@@ -492,85 +479,7 @@ const NewUserForm = ({
                 )}
               </div>
 
-              {/* Additional Info for existing users */}
-              {selectedUser && (
-                <div className="space-y-4">
-                  <h4 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">
-                    Account Information
-                  </h4>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <Label>Account Status</Label>
-                      <p
-                        className={`font-medium ${
-                          selectedUser.isActive
-                            ? "text-green-600"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {selectedUser.isActive ? "Active" : "Inactive"}
-                      </p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <Label>Member Since</Label>
-                      <p className="font-medium text-gray-700">
-                        {new Date(selectedUser.createdAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                    {selectedUser.lastLogin && (
-                      <div className="bg-gray-50 rounded-lg p-4">
-                        <Label>Last Login</Label>
-                        <p className="font-medium text-gray-700">
-                          {new Date(
-                            selectedUser.lastLogin
-                          ).toLocaleDateString()}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {selectedUser.orders && selectedUser.orders.length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="bg-blue-50 rounded-lg p-4">
-                        <Label>Total Orders</Label>
-                        <p className="text-2xl font-bold text-blue-600">
-                          {selectedUser.orders.length}
-                        </p>
-                      </div>
-                      {selectedUser.userCart &&
-                        Object.keys(selectedUser.userCart).length > 0 && (
-                          <div className="bg-orange-50 rounded-lg p-4">
-                            <Label>Cart Items</Label>
-                            <p className="text-2xl font-bold text-orange-600">
-                              {Object.keys(selectedUser.userCart).length}
-                            </p>
-                          </div>
-                        )}
-                    </div>
-                  )}
-
-                  {selectedUser.lastLogin && (
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <Label>Last Login</Label>
-                      <p className="font-medium text-gray-700">
-                        {new Date(selectedUser.lastLogin).toLocaleString()}
-                      </p>
-                    </div>
-                  )}
-
-                  {selectedUser.orders && selectedUser.orders.length > 0 && (
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <Label>Total Orders</Label>
-                      <p className="font-medium text-gray-700">
-                        {selectedUser.orders.length} orders
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Form Actions */}
+              {/* Hành động */}
               <div className="flex flex-col sm:flex-row gap-3 pt-4 sm:pt-6 border-t border-gray-200 mt-6">
                 <button
                   type="button"
@@ -579,7 +488,7 @@ const NewUserForm = ({
                          rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-gray-300 
                          transition-all duration-200 font-medium text-sm sm:text-base"
                 >
-                  {isReadOnly ? "Close" : "Cancel"}
+                  {isReadOnly ? "Đóng" : "Huỷ"}
                 </button>
                 {!isReadOnly && (
                   <button
@@ -589,7 +498,7 @@ const NewUserForm = ({
                            focus:ring-2 focus:ring-blue-300 transition-all duration-200 
                            font-medium text-sm sm:text-base shadow-md hover:shadow-lg transform hover:scale-[1.02]"
                   >
-                    {selectedUser ? "💾 Update User" : "➕ Create User"}
+                    {selectedUser ? "💾 Cập nhật" : "➕ Tạo mới"}
                   </button>
                 )}
               </div>
@@ -598,7 +507,6 @@ const NewUserForm = ({
         </div>
       </div>
 
-      {/* Address Management Modal */}
       <AddressModal
         isOpen={isAddressModalOpen}
         close={() => setIsAddressModalOpen(false)}

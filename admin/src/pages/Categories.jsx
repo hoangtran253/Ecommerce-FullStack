@@ -27,7 +27,7 @@ const Categories = () => {
   const [imagePreview, setImagePreview] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // Fetch categories
+  // Lấy danh mục từ API
   const fetchCategories = useCallback(async () => {
     try {
       setLoading(true);
@@ -42,11 +42,11 @@ const Categories = () => {
       if (data.success) {
         setCategories(data.categories);
       } else {
-        toast.error(data.message || "Failed to fetch categories");
+        toast.error(data.message || "Không thể tải danh mục");
       }
     } catch (error) {
-      console.error("Fetch categories error:", error);
-      toast.error("Failed to fetch categories");
+      console.error("Lỗi khi tải danh mục:", error);
+      toast.error("Không thể tải danh mục");
     } finally {
       setLoading(false);
     }
@@ -56,7 +56,7 @@ const Categories = () => {
     fetchCategories();
   }, [fetchCategories]);
 
-  // Handle form input changes
+  // Xử lý thay đổi input form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -65,7 +65,7 @@ const Categories = () => {
     }));
   };
 
-  // Handle image upload
+  // Xử lý chọn ảnh
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -77,17 +77,17 @@ const Categories = () => {
     }
   };
 
-  // Handle form submission
+  // Gửi form thêm/sửa danh mục
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name.trim()) {
-      toast.error("Category name is required");
+      toast.error("Tên danh mục là bắt buộc");
       return;
     }
 
     if (!formData.image && !editingCategory) {
-      toast.error("Category image is required");
+      toast.error("Vui lòng chọn hình ảnh danh mục");
       return;
     }
 
@@ -102,9 +102,7 @@ const Categories = () => {
       }
 
       const url = editingCategory
-        ? `${import.meta.env.VITE_BACKEND_URL}/api/category/${
-            editingCategory._id
-          }`
+        ? `${import.meta.env.VITE_BACKEND_URL}/api/category/${editingCategory._id}`
         : `${import.meta.env.VITE_BACKEND_URL}/api/category`;
 
       const response = await fetch(url, {
@@ -119,32 +117,30 @@ const Categories = () => {
 
       if (data.success) {
         toast.success(
-          editingCategory
-            ? "Category updated successfully"
-            : "Category created successfully"
+          editingCategory ? "Cập nhật danh mục thành công" : "Thêm danh mục thành công"
         );
         fetchCategories();
         closeModal();
       } else {
-        toast.error(data.message || "Failed to save category");
+        toast.error(data.message || "Không thể lưu danh mục");
       }
     } catch (error) {
-      console.error("Submit category error:", error);
-      toast.error("Failed to save category");
+      console.error("Lỗi khi lưu danh mục:", error);
+      toast.error("Không thể lưu danh mục");
     } finally {
       setSubmitting(false);
     }
   };
 
-  // Handle delete category
+  // Xóa danh mục
   const handleDelete = async (categoryId) => {
-    if (!window.confirm("Are you sure you want to delete this category?")) {
+    if (!window.confirm("Bạn có chắc muốn xóa danh mục này?")) {
       return;
     }
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/category/${categoryId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/category/${categoryId}`,
         {
           method: "DELETE",
           headers: {
@@ -156,18 +152,18 @@ const Categories = () => {
       const data = await response.json();
 
       if (data.success) {
-        toast.success("Category deleted successfully");
+        toast.success("Xóa danh mục thành công");
         fetchCategories();
       } else {
-        toast.error(data.message || "Failed to delete category");
+        toast.error(data.message || "Không thể xóa danh mục");
       }
     } catch (error) {
-      console.error("Delete category error:", error);
-      toast.error("Failed to delete category");
+      console.error("Lỗi khi xóa danh mục:", error);
+      toast.error("Không thể xóa danh mục");
     }
   };
 
-  // Open modal for create/edit
+  // Mở modal thêm/sửa danh mục
   const openModal = (category = null) => {
     if (category) {
       setEditingCategory(category);
@@ -189,7 +185,7 @@ const Categories = () => {
     setShowModal(true);
   };
 
-  // Close modal
+  // Đóng modal
   const closeModal = () => {
     setShowModal(false);
     setEditingCategory(null);
@@ -201,7 +197,7 @@ const Categories = () => {
     setImagePreview("");
   };
 
-  // Filter categories based on search
+  // Lọc danh mục theo tìm kiếm
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -213,36 +209,36 @@ const Categories = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Categories
+              Danh mục sản phẩm
             </h1>
-            <p className="text-gray-600 mt-1">Manage product categories</p>
+            <p className="text-gray-600 mt-1">Quản lý các danh mục sản phẩm</p>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={fetchCategories}
               className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-              title="Refresh Categories"
+              title="Tải lại danh mục"
             >
               <FaSync className="w-4 h-4" />
-              Refresh
+              Làm mới
             </button>
             <button
               onClick={() => openModal()}
               className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
             >
               <FaPlus />
-              Add Category
+              Thêm danh mục
             </button>
           </div>
         </div>
 
-        {/* Search and Filter */}
+        {/* Ô tìm kiếm */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search categories..."
+              placeholder="Tìm kiếm danh mục..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
@@ -250,210 +246,86 @@ const Categories = () => {
           </div>
         </div>
 
-        {/* Categories List */}
+        {/* Loading State */}
         {loading ? (
-          <>
-            {/* Desktop Table Skeleton */}
-            <div className="hidden lg:block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Image
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Name
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description
-                      </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {[...Array(5)].map((_, index) => (
-                      <tr key={index} className="animate-pulse">
-                        <td className="px-6 py-4">
-                          <div className="w-12 h-12 bg-gray-200 rounded"></div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="h-4 bg-gray-200 rounded w-24"></div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="h-4 bg-gray-200 rounded w-48"></div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex justify-end gap-2">
-                            <div className="h-8 bg-gray-200 rounded w-16"></div>
-                            <div className="h-8 bg-gray-200 rounded w-16"></div>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse"
+              >
+                <div className="w-full h-32 bg-gray-200 rounded-lg mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
               </div>
-            </div>
-
-            {/* Mobile Cards Skeleton */}
-            <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[...Array(6)].map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 animate-pulse"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0"></div>
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 bg-gray-200 rounded w-24"></div>
-                      <div className="h-3 bg-gray-200 rounded w-32"></div>
-                      <div className="flex gap-2 mt-3">
-                        <div className="h-8 bg-gray-200 rounded w-16"></div>
-                        <div className="h-8 bg-gray-200 rounded w-16"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
+            ))}
+          </div>
         ) : filteredCategories.length === 0 ? (
           <div className="text-center py-12">
             <FaImage className="mx-auto text-6xl text-gray-300 mb-4" />
             <h3 className="text-xl font-semibold text-gray-700 mb-2">
-              {searchTerm ? "No categories found" : "No categories yet"}
+              {searchTerm ? "Không tìm thấy danh mục nào" : "Chưa có danh mục nào"}
             </h3>
             <p className="text-gray-500 mb-6">
               {searchTerm
-                ? "Try adjusting your search terms"
-                : "Start by creating your first category"}
+                ? "Hãy thử thay đổi từ khóa tìm kiếm"
+                : "Hãy bắt đầu bằng cách thêm danh mục đầu tiên của bạn"}
             </p>
             {!searchTerm && (
               <button
                 onClick={() => openModal()}
                 className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
               >
-                Create Category
+                Thêm danh mục
               </button>
             )}
           </div>
         ) : (
-          <>
-            {/* Desktop Table View */}
-            <div className="hidden lg:block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Image
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Name
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description
-                      </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredCategories.map((category) => (
-                      <tr key={category._id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4">
-                          <img
-                            src={category.image}
-                            alt={category.name}
-                            className="w-12 h-12 object-cover rounded-lg"
-                          />
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {category.name}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm text-gray-600 max-w-xs truncate">
-                            {category.description || "No description"}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex justify-end gap-2">
-                            <button
-                              onClick={() => openModal(category)}
-                              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors"
-                            >
-                              <FaEdit />
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleDelete(category._id)}
-                              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-50 text-red-600 rounded hover:bg-red-100 transition-colors"
-                            >
-                              <FaTrash />
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Mobile Card View */}
-            <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {filteredCategories.map((category) => (
-                <div
-                  key={category._id}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex items-start gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredCategories.map((category) => (
+              <div
+                key={category._id}
+                className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+              >
+                <div className="p-6">
+                  <div className="w-full h-32 mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                      className="max-w-full max-h-full object-contain"
                     />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 truncate">
-                        {category.name}
-                      </h3>
-                      {category.description && (
-                        <p className="text-gray-600 text-sm mt-1 line-clamp-2">
-                          {category.description}
-                        </p>
-                      )}
-                      <div className="flex gap-2 mt-3">
-                        <button
-                          onClick={() => openModal(category)}
-                          className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors"
-                        >
-                          <FaEdit />
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(category._id)}
-                          className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-50 text-red-600 rounded hover:bg-red-100 transition-colors"
-                        >
-                          <FaTrash />
-                          Delete
-                        </button>
-                      </div>
-                    </div>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 text-lg mb-2 line-clamp-1">
+                    {category.name}
+                  </h3>
+                  {category.description && (
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                      {category.description}
+                    </p>
+                  )}
+                  <div className="flex gap-2 pt-3 border-t">
+                    <button
+                      onClick={() => openModal(category)}
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-2 text-sm bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                    >
+                      <FaEdit />
+                      Sửa
+                    </button>
+                    <button
+                      onClick={() => handleDelete(category._id)}
+                      className="flex-1 flex items-center justify-center gap-1 px-3 py-2 text-sm bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
+                    >
+                      <FaTrash />
+                      Xóa
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </>
+              </div>
+            ))}
+          </div>
         )}
 
-        {/* Modal */}
+        {/* Modal thêm/sửa danh mục */}
         {showModal && (
           <div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
@@ -466,7 +338,7 @@ const Categories = () => {
             <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-center p-6 border-b">
                 <h2 className="text-xl font-semibold">
-                  {editingCategory ? "Edit Category" : "Add Category"}
+                  {editingCategory ? "Chỉnh sửa danh mục" : "Thêm danh mục mới"}
                 </h2>
                 <button
                   onClick={closeModal}
@@ -479,7 +351,7 @@ const Categories = () => {
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Category Name *
+                    Tên danh mục *
                   </label>
                   <input
                     type="text"
@@ -487,14 +359,14 @@ const Categories = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    placeholder="Enter category name"
+                    placeholder="Nhập tên danh mục"
                     required
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Description
+                    Mô tả
                   </label>
                   <textarea
                     name="description"
@@ -502,13 +374,13 @@ const Categories = () => {
                     onChange={handleInputChange}
                     rows={3}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
-                    placeholder="Enter category description"
+                    placeholder="Nhập mô tả danh mục (nếu có)"
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Category Image *
+                    Hình ảnh danh mục *
                   </label>
                   <input
                     type="file"
@@ -520,7 +392,7 @@ const Categories = () => {
                     <div className="mt-3">
                       <img
                         src={imagePreview}
-                        alt="Preview"
+                        alt="Xem trước"
                         className="w-32 h-32 object-cover rounded-lg border"
                       />
                     </div>
@@ -533,7 +405,7 @@ const Categories = () => {
                     onClick={closeModal}
                     className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    Cancel
+                    Hủy
                   </button>
                   <button
                     type="submit"
@@ -541,10 +413,10 @@ const Categories = () => {
                     className="flex-1 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
                   >
                     {submitting
-                      ? "Saving..."
+                      ? "Đang lưu..."
                       : editingCategory
-                      ? "Update"
-                      : "Create"}
+                      ? "Cập nhật"
+                      : "Tạo mới"}
                   </button>
                 </div>
               </form>

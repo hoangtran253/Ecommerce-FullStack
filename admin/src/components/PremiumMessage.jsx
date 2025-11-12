@@ -1,20 +1,20 @@
-import { FaCrown, FaStar, FaRocket, FaGift } from "react-icons/fa";
+import { FaCrown, FaStar, FaRocket, FaGift, FaLock } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import PropTypes from "prop-types";
 
 const PremiumMessage = ({
-  title = "Premium Feature",
-  description = "This feature is available in the premium version only.",
+  title = "Tính năng Premium",
+  description = "Tính năng này chỉ khả dụng trong phiên bản Premium.",
   features = [],
   showDemoPreview = false,
 }) => {
   const defaultFeatures = [
-    "Advanced analytics and reporting",
-    "Unlimited orders and invoices",
-    "Priority customer support",
-    "Custom branding options",
-    "API access and integrations",
-    "Advanced user management",
+    "Phân tích và báo cáo nâng cao",
+    "Không giới hạn đơn hàng và hoá đơn",
+    "Hỗ trợ khách hàng ưu tiên",
+    "Tùy chỉnh thương hiệu riêng",
+    "Truy cập API và tích hợp hệ thống",
+    "Quản lý người dùng nâng cao",
   ];
 
   const featureList = features.length > 0 ? features : defaultFeatures;
@@ -48,7 +48,7 @@ const PremiumMessage = ({
             <div className="flex items-center gap-3 mb-6">
               <FaStar className="text-2xl text-yellow-500" />
               <h2 className="text-2xl font-bold text-gray-900">
-                Premium Features
+                Các tính năng Premium
               </h2>
             </div>
 
@@ -70,16 +70,16 @@ const PremiumMessage = ({
           <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8 text-white shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <FaRocket className="text-2xl" />
-              <h2 className="text-2xl font-bold">Why Upgrade?</h2>
+              <h2 className="text-2xl font-bold">Vì sao nên nâng cấp?</h2>
             </div>
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <FaGift className="text-2xl text-yellow-300 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Full Access</h3>
+                  <h3 className="font-semibold text-lg mb-2">Truy cập đầy đủ</h3>
                   <p className="text-purple-100">
-                    Unlock all premium features and capabilities
+                    Mở khoá tất cả các tính năng và khả năng cao cấp
                   </p>
                 </div>
               </div>
@@ -88,10 +88,10 @@ const PremiumMessage = ({
                 <HiSparkles className="text-2xl text-yellow-300 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-lg mb-2">
-                    Support Development
+                    Hỗ trợ phát triển
                   </h3>
                   <p className="text-purple-100">
-                    Help us continue improving and adding new features
+                    Giúp chúng tôi tiếp tục cải tiến và bổ sung tính năng mới
                   </p>
                 </div>
               </div>
@@ -100,10 +100,10 @@ const PremiumMessage = ({
                 <FaStar className="text-2xl text-yellow-300 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-lg mb-2">
-                    Priority Support
+                    Hỗ trợ ưu tiên
                   </h3>
                   <p className="text-purple-100">
-                    Get faster responses and dedicated assistance
+                    Nhận phản hồi nhanh hơn và hỗ trợ tận tình hơn
                   </p>
                 </div>
               </div>
@@ -115,16 +115,16 @@ const PremiumMessage = ({
         {showDemoPreview && (
           <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 mb-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              Preview of Premium Features
+              Xem trước tính năng Premium
             </h3>
             <div className="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
               <div className="text-center text-gray-500">
                 <FaCrown className="text-4xl mx-auto mb-4 text-yellow-500" />
                 <p className="text-lg font-medium">
-                  Interactive Demo Available in Premium
+                  Bản demo tương tác chỉ có trong phiên bản Premium
                 </p>
                 <p className="text-sm mt-2">
-                  Get instant access to all features and capabilities
+                  Nhận quyền truy cập ngay vào tất cả các tính năng cao cấp
                 </p>
               </div>
             </div>
@@ -135,10 +135,10 @@ const PremiumMessage = ({
         <div className="text-center">
           <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 inline-block">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Ready to Upgrade?
+              Sẵn sàng nâng cấp?
             </h3>
             <p className="text-gray-600 mb-6 max-w-md">
-              Support the development and get access to all premium features
+              Hỗ trợ phát triển dự án và mở khoá toàn bộ tính năng Premium
             </p>
 
             <a
@@ -148,12 +148,12 @@ const PremiumMessage = ({
               className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               <FaCrown className="text-xl" />
-              <span className="text-lg">Buy Me a Coffee & Unlock Premium</span>
+              <span className="text-lg">Mua cho tôi ly cà phê & mở khoá Premium</span>
               <HiSparkles className="text-xl" />
             </a>
 
             <p className="text-sm text-gray-500 mt-4">
-              One-time purchase • Instant access • Lifetime updates
+              Thanh toán một lần • Truy cập tức thì • Cập nhật trọn đời
             </p>
           </div>
         </div>

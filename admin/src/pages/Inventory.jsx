@@ -4,25 +4,25 @@ import { MdOutlineInventory, MdLowPriority } from "react-icons/md";
 const Inventory = () => {
   const inventoryStats = [
     {
-      title: "Total Products",
+      title: "Tổng sản phẩm",
       value: "156",
       icon: <FaBoxes />,
       color: "blue",
     },
     {
-      title: "Low Stock Items",
+      title: "Hàng sắp hết",
       value: "12",
       icon: <FaExclamationTriangle />,
       color: "yellow",
     },
     {
-      title: "Out of Stock",
+      title: "Hết hàng",
       value: "3",
       icon: <MdLowPriority />,
       color: "red",
     },
     {
-      title: "In Stock",
+      title: "Còn hàng",
       value: "141",
       icon: <FaCheckCircle />,
       color: "green",
@@ -40,14 +40,14 @@ const Inventory = () => {
     <div className="p-6">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Inventory Management
+          Quản lý Kho hàng
         </h1>
         <p className="text-gray-600">
-          Monitor and manage your product inventory
+          Theo dõi và quản lý kho sản phẩm của bạn
         </p>
       </div>
 
-      {/* Inventory Stats */}
+      {/* Thống kê kho hàng */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {inventoryStats.map((stat, index) => (
           <div
@@ -71,13 +71,13 @@ const Inventory = () => {
         ))}
       </div>
 
-      {/* Low Stock Alert */}
+      {/* Cảnh báo hàng sắp hết */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
         <div className="p-6 border-b border-gray-100">
           <div className="flex items-center gap-2">
             <FaExclamationTriangle className="text-yellow-500" />
             <h3 className="text-lg font-semibold text-gray-900">
-              Low Stock Alert
+              Cảnh báo hàng sắp hết
             </h3>
           </div>
         </div>
@@ -91,14 +91,14 @@ const Inventory = () => {
                 <div>
                   <h4 className="font-medium text-gray-900">{item.name}</h4>
                   <p className="text-sm text-gray-600">
-                    Threshold: {item.threshold} units
+                    Ngưỡng: {item.threshold} sản phẩm
                   </p>
                 </div>
                 <div className="text-right">
                   <span className="text-lg font-bold text-yellow-600">
                     {item.stock}
                   </span>
-                  <p className="text-sm text-gray-600">units left</p>
+                  <p className="text-sm text-gray-600">sản phẩm còn lại</p>
                 </div>
               </div>
             ))}
@@ -106,26 +106,26 @@ const Inventory = () => {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      {/* Tác vụ nhanh */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="p-6 border-b border-gray-100">
-          <h3 className="text-lg font-semibold text-gray-900">Quick Actions</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Tác vụ nhanh</h3>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors">
               <MdOutlineInventory className="text-2xl text-gray-400 mb-2 mx-auto" />
               <p className="text-sm font-medium text-gray-600">
-                Update Inventory
+                Cập nhật Kho hàng
               </p>
             </button>
             <button className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors">
               <FaBoxes className="text-2xl text-gray-400 mb-2 mx-auto" />
-              <p className="text-sm font-medium text-gray-600">Bulk Import</p>
+              <p className="text-sm font-medium text-gray-600">Nhập hàng loạt</p>
             </button>
             <button className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors">
               <FaCheckCircle className="text-2xl text-gray-400 mb-2 mx-auto" />
-              <p className="text-sm font-medium text-gray-600">Stock Audit</p>
+              <p className="text-sm font-medium text-gray-600">Kiểm kê kho</p>
             </button>
           </div>
         </div>

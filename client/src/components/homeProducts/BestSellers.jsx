@@ -45,7 +45,8 @@ const BestSellers = () => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${config?.baseUrl}/api/products?_type=best_sellers`;
+  // Sửa endpoint cho đúng API thực tế
+  const endpoint = `${config?.baseUrl}/api/products/best_sellers`;
 
   useEffect(() => {
     const getProducts = async () => {
@@ -54,7 +55,7 @@ const BestSellers = () => {
         const data = await getData(endpoint);
         setProducts(data?.products || []);
       } catch (error) {
-        console.error("Lỗi khi lấy danh sách sản phẩm:", error);
+        console.error("Lỗi khi lấy danh sách sản phẩm bán chạy:", error);
         setProducts([]);
       } finally {
         setLoading(false);

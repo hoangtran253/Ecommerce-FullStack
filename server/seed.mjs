@@ -76,28 +76,30 @@ const brandsData = [
 ];
 
 const productsData = [
+  // --- BESTSELLER ---
+  // --- BESTSELLER ---
   {
     name: "Áo thun cotton cơ bản",
     slug: "ao-thun-cotton-co-ban",
     description: "Chất vải mềm mịn, thấm hút mồ hôi tốt, phù hợp mặc hàng ngày.",
     price: 250000,
     quantity: 100,
-    sold: 24,
+    soldQuantity: 45, // ← Sửa từ 'sold' sang 'soldQuantity'
     shipping: true,
     images: ["https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600"],
     category: "Áo",
     brand: "Uniqlo"
   },
   {
-    name: "Áo khoác gió nam",
-    slug: "ao-khoac-gio-nam",
-    description: "Chống nước nhẹ, nhẹ nhàng, thích hợp đi chơi hoặc đi làm.",
-    price: 550000,
-    quantity: 50,
-    sold: 12,
+    name: "Giày thể thao chạy bộ",
+    slug: "giay-the-thao-chay-bo",
+    description: "Đệm êm, nhẹ, hỗ trợ tốt cho người chạy bộ.",
+    price: 1200000,
+    quantity: 30,
+    soldQuantity: 38, // ← Sửa
     shipping: true,
-    images: ["https://images.unsplash.com/photo-1578357628143-0f139c3fa54a?auto=format&fit=crop&w=600"],
-    category: "Áo",
+    images: ["https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600"],
+    category: "Giày",
     brand: "Nike"
   },
   {
@@ -106,11 +108,63 @@ const productsData = [
     description: "Chất denim co giãn 4 chiều, ôm dáng nhưng không gò bó.",
     price: 650000,
     quantity: 80,
-    sold: 35,
+    soldQuantity: 35, // ← Sửa
     shipping: true,
     images: ["https://images.unsplash.com/photo-1541099649105-f69ad23f2e3d?auto=format&fit=crop&w=600"],
     category: "Quần",
     brand: "Zara"
+  },
+
+  // --- SẢN PHẨM MỚI (NEW ARRIVALS) ---
+  {
+    name: "Áo khoác len dáng rộng",
+    slug: "ao-khoac-len-dang-rong",
+    description: "Phong cách Hàn Quốc, giữ ấm và thời thượng.",
+    price: 890000,
+    quantity: 35,
+    sold: 5,
+    shipping: true,
+    images: ["https://images.unsplash.com/photo-1529374255404-31166e3099d4?auto=format&fit=crop&w=600"],
+    category: "Đồ mùa đông",
+    brand: "Zara"
+  },
+  {
+    name: "Túi đeo chéo nhỏ",
+    slug: "tui-deo-cheo-nho",
+    description: "Gọn nhẹ, nhiều ngăn, phù hợp đi chơi hoặc đi học.",
+    price: 320000,
+    quantity: 60,
+    sold: 8,
+    shipping: true,
+    images: ["https://images.unsplash.com/photo-1585568009818-5a44d0db7e33?auto=format&fit=crop&w=600"],
+    category: "Phụ kiện",
+    brand: "H&M"
+  },
+  {
+    name: "Quần short thể thao",
+    slug: "quan-short-the-thao",
+    description: "Thoải mái, co giãn, lý tưởng cho tập luyện.",
+    price: 350000,
+    quantity: 85,
+    sold: 12,
+    shipping: true,
+    images: ["https://images.unsplash.com/photo-1589003077984-894e133e5a00?auto=format&fit=crop&w=600"],
+    category: "Đồ thể thao",
+    brand: "Nike"
+  },
+
+  // --- CÁC SẢN PHẨM KHÁC ---
+  {
+    name: "Áo khoác gió nam",
+    slug: "ao-khoac-gio-nam",
+    description: "Chống nước nhẹ, nhẹ nhàng, thích hợp đi chơi hoặc đi làm.",
+    price: 550000,
+    quantity: 50,
+    sold: 12,
+    shipping: true,
+    images: ["https://res.cloudinary.com/demo/image/upload/v1371813695/jacket.png"],
+    category: "Áo",
+    brand: "Nike"
   },
   {
     name: "Quần jogger thể thao",
@@ -120,21 +174,9 @@ const productsData = [
     quantity: 70,
     sold: 18,
     shipping: true,
-    images: ["https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=600"],
+    images: ["https://res.cloudinary.com/demo/image/upload/v1371813695/sports-pants.png"],
     category: "Quần",
     brand: "Adidas"
-  },
-  {
-    name: "Giày thể thao chạy bộ",
-    slug: "giay-the-thao-chay-bo",
-    description: "Đệm êm, nhẹ, hỗ trợ tốt cho người chạy bộ.",
-    price: 1200000,
-    quantity: 30,
-    sold: 9,
-    shipping: true,
-    images: ["https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600"],
-    category: "Giày",
-    brand: "Nike"
   },
   {
     name: "Giày sneaker casual",
@@ -161,18 +203,6 @@ const productsData = [
     brand: "Nike"
   },
   {
-    name: "Túi đeo chéo nhỏ",
-    slug: "tui-deo-cheo-nho",
-    description: "Gọn nhẹ, nhiều ngăn, phù hợp đi chơi hoặc đi học.",
-    price: 320000,
-    quantity: 60,
-    sold: 31,
-    shipping: true,
-    images: ["https://images.unsplash.com/photo-1585568009818-5a44d0db7e33?auto=format&fit=crop&w=600"],
-    category: "Phụ kiện",
-    brand: "H&M"
-  },
-  {
     name: "Áo thun thể thao khô nhanh",
     slug: "ao-thun-the-thao-kho-nhanh",
     description: "Công nghệ thấm hút mồ hôi, khô nhanh, dành cho vận động.",
@@ -180,21 +210,9 @@ const productsData = [
     quantity: 90,
     sold: 15,
     shipping: true,
-    images: ["https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=600"],
+    images: ["https://res.cloudinary.com/demo/image/upload/v1371813695/sports-tshirt.png"],
     category: "Đồ thể thao",
     brand: "Adidas"
-  },
-  {
-    name: "Quần short thể thao",
-    slug: "quan-short-the-thao",
-    description: "Thoải mái, co giãn, lý tưởng cho tập luyện.",
-    price: 350000,
-    quantity: 85,
-    sold: 28,
-    shipping: true,
-    images: ["https://images.unsplash.com/photo-1589003077984-894e133e5a00?auto=format&fit=crop&w=600"],
-    category: "Đồ thể thao",
-    brand: "Nike"
   },
   {
     name: "Áo len cổ lọ",
@@ -204,21 +222,9 @@ const productsData = [
     quantity: 40,
     sold: 7,
     shipping: true,
-    images: ["https://images.unsplash.com/photo-1578357628143-0f139c3fa54a?auto=format&fit=crop&w=600"],
+    images: ["https://res.cloudinary.com/demo/image/upload/v1371813695/turtleneck.png"],
     category: "Đồ mùa đông",
     brand: "Uniqlo"
-  },
-  {
-    name: "Áo khoác len dáng rộng",
-    slug: "ao-khoac-len-dang-rong",
-    description: "Phong cách Hàn Quốc, giữ ấm và thời thượng.",
-    price: 890000,
-    quantity: 35,
-    sold: 5,
-    shipping: true,
-    images: ["https://images.unsplash.com/photo-1529374255404-31166e3099d4?auto=format&fit=crop&w=600"],
-    category: "Đồ mùa đông",
-    brand: "Zara"
   }
 ];
 

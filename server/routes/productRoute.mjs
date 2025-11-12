@@ -26,7 +26,9 @@ router.post(
   adminAuth,
   addProduct
 );
+
 router.post(`${routeValue}remove`, adminAuth, removeProduct);
+
 router.put(
   `${routeValue}update/:id`,
   upload.fields([
@@ -38,12 +40,17 @@ router.put(
   adminAuth,
   updateProduct
 );
+
 router.post(`${routeValue}update-stock`, updateStock);
+
 router.get(`${routeValue}single`, singleProducts);
+
 router.get(`${routeValue}list`, listProducts);
 
 // Public routes for frontend
 router.get("/api/products", listProducts);
+
+// Route để lấy sản phẩm theo loại (best_sellers, new_arrivals, etc.)
 router.get("/api/products/:type", (req, res, next) => {
   req.query._type = req.params.type;
   listProducts(req, res, next);
