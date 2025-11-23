@@ -32,7 +32,10 @@ app.use(
       console.log("CORS request from origin:", origin);
 
       // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
+      if (!origin) { 
+        console.log("No origin detected: allowing request.");
+        return callback(null, true); 
+      }
 
       // In development, allow all origins for easier testing
       if (process.env.NODE_ENV === "development") {
