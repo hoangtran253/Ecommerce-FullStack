@@ -29,25 +29,7 @@ console.log("Allowed CORS Origins:", allowedOrigins);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      console.log("CORS request from origin:", origin);
-
-      // Cho phép các yêu cầu không có Origin (như Postman hoặc Mobile)
-      if (!origin) { 
-        console.log("No origin detected: allowing request.");
-        return callback(null, true); 
-      }
-
-      // Kiểm tra xem Origin có trong danh sách cố định (localhost, domain chính) 
-      // HOẶC có khớp với mẫu Regex Vercel (cho các URL deploy tạm thời)
-      if (allowedOrigins.includes(origin) || VERCEL_REGEX.test(origin)) {
-        console.log("Origin allowed:", origin);
-        callback(null, true);
-      } else {
-        console.log("Origin blocked:", origin);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "*", // Tạm thời cho phép tất cả các nguồn gốc
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
