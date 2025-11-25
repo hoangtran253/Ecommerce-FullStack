@@ -1,8 +1,8 @@
 import logo from "./orebiLogo.png";
 import logoLight from "./logoLight.png";
-import bannerImgOne from "./banner/slideOne.png";
-import bannerImgTwo from "./banner/slideTwo.png";
-import bannerImgThree from "./banner/slideThree.png";
+import bannerImgOne from "./banner/baner2.png";
+import bannerImgTwo from "./banner/baner1.png";
+import bannerImgThree from "./banner/baner3.png";
 // ============== Products Start here ====================
 
 // Year Product

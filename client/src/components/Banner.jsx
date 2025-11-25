@@ -14,37 +14,40 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 const bannerData = [
   {
-    title: "Premium Collection",
-    subtitle: "Top selling smartphone and accessories",
+    title: "Bộ Sưu Tập Xuân - Hè",
+    subtitle: "Thời trang mới nhất cho mùa năm nay",
     description:
-      "Discover the latest in mobile technology with exclusive discounts",
-    discount: "Up to 40% off",
-    from: 599.99,
-    sale: "Limited Time",
-    image: bannerImgOne,
-    buttonText: "Shop Collection",
+      "Khám phá phong cách trẻ trung, năng động với bộ sưu tập Xuân - Hè 2025.",
+    discount: "Giảm đến 40%",
+    from: 299000,
+    sale: "Khuyến mãi lớn",
+    image: bannerImgOne, // thay hình áo/váy phù hợp
+    buttonText: "Mua Ngay",
   },
   {
-    title: "Household Chairs",
-    subtitle: "The best deals on Chairs",
-    description: "Professional-grade chairs for creatives and professionals",
-    discount: "$250 off",
-    from: 2349.99,
-    sale: "Special Offer",
-    image: bannerImgTwo,
-    buttonText: "Explore Home Decor",
+    title: "Thời Trang Công Sở",
+    subtitle: "Lịch lãm - Thanh lịch - Chuyên nghiệp",
+    description:
+      "Áo sơ mi, quần tây, chân váy... phù hợp mọi môi trường làm việc.",
+    discount: "Giảm 250K",
+    from: 499000,
+    sale: "Ưu đãi đặc biệt",
+    image: bannerImgTwo, // thay hình model công sở
+    buttonText: "Khám Phá Ngay",
   },
   {
-    title: "Lighting Excellence",
-    subtitle: "Premium lighting collection",
-    description: "Experience crystal-clear light with our curated selection",
-    discount: "Free shipping",
-    from: 199.99,
-    sale: "Weekend Deal",
-    image: bannerImgThree,
-    buttonText: "Shop Lights",
+    title: "Streetwear Đột Phá",
+    subtitle: "Phong cách cá tính, nổi bật",
+    description:
+      "Áo phông, hoodie, quần jogger và phụ kiện theo xu hướng thời trang đường phố.",
+    discount: "Freeship toàn quốc",
+    from: 199000,
+    sale: "Deal Cuối Tuần",
+    image: bannerImgThree, // hình streetwear
+    buttonText: "Xem Bộ Sưu Tập",
   },
 ];
+
 
 const Banner = () => {
   const navigate = useNavigate();

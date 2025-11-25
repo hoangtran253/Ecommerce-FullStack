@@ -19,6 +19,8 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
   "http://localhost:5174",
   "http://localhost:5173",
+  "https://ecommerce-client-hoang.fly.dev",
+  "https://ecommerce-admin-hoang.fly.dev",
   "http://localhost:8081", // iOS simulator
   "http://10.0.2.2:8081", // Android emulator
   "http://10.0.2.2:8000", // Android emulator direct access
@@ -28,12 +30,26 @@ const allowedOrigins = [
 console.log("Allowed CORS Origins:", allowedOrigins);
 
 app.use(
-  cors({
-    origin: "*", // Tạm thời cho phép tất cả các nguồn gốc
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  cors({
+    origin: (origin, callback) => {
+      // Cho phép request không có origin (vd: mobile app, Postman)
+      if (!origin) return callback(null, true);
+
+      // Cho phép nếu origin khớp với danh sách cho phép hoặc Vercel preview
+      if (
+        allowedOrigins.includes(origin) ||
+        VERCEL_REGEX.test(origin)
+      ) {
+        return callback(null, true);
+      }
+
+      // Từ chối nếu không khớp
+      callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+  })
 );
 
 app.use(express.json());

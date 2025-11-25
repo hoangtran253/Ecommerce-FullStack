@@ -53,6 +53,10 @@ router.get("/api/products", listProducts);
 // Route để lấy sản phẩm theo loại (best_sellers, new_arrivals, etc.)
 router.get("/api/products/:type", (req, res, next) => {
   req.query._type = req.params.type;
+  if (req.params.type === "best_sellers") {
+    // Sắp xếp theo số lượng đã bán nếu là best sellers
+    req.query.sort = "-soldQuantity";
+  }
   listProducts(req, res, next);
 });
 

@@ -146,7 +146,9 @@ const Add = ({ token }) => {
       const data = new FormData();
 
       // Thêm dữ liệu vào form
-      data.append("_type", formData._type);
+      if (formData._type) {
+        data.append("_type", formData._type);
+      }
       data.append("name", formData.name);
       data.append("description", formData.description);
       data.append("brand", formData.brand);
@@ -285,17 +287,18 @@ const Add = ({ token }) => {
                   />
                 </div>
 
-                <div className="lg:col-span-2">
-                  <Label htmlFor="description">Mô tả *</Label>
-                  <textarea
-                    placeholder="Nhập mô tả sản phẩm"
-                    className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                    rows={4}
-                    name="description"
-                    value={formData.description}
+                <div>
+                  <Label htmlFor="_type">Loại sản phẩm</Label>
+                  <select
+                    name="_type"
+                    value={formData._type}
                     onChange={handleChange}
-                    required
-                  />
+                    className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">Sản phẩm thường</option>
+                    <option value="new_arrivals">Sản phẩm mới</option>
+                    <option value="best_sellers">Sản phẩm bán chạy</option>
+                  </select>
                 </div>
 
                 <div>
@@ -318,20 +321,17 @@ const Add = ({ token }) => {
                   </select>
                 </div>
 
-                <div>
-                  <Label htmlFor="_type">Loại sản phẩm</Label>
-                  <select
-                    name="_type"
-                    value={formData._type}
+                <div className="lg:col-span-2">
+                  <Label htmlFor="description">Mô tả *</Label>
+                  <textarea
+                    placeholder="Nhập mô tả sản phẩm"
+                    className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    rows={4}
+                    name="description"
+                    value={formData.description}
                     onChange={handleChange}
-                    className="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Chọn loại</option>
-                    <option value="new_arrivals">Hàng mới về</option>
-                    <option value="best_sellers">Bán chạy</option>
-                    <option value="special_offers">Ưu đãi đặc biệt</option>
-                    <option value="promotions">Khuyến mãi</option>
-                  </select>
+                    required
+                  />
                 </div>
               </div>
             </div>

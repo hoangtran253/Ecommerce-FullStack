@@ -1,0 +1,15 @@
+app = "ecommerce-admin-hoang"
+primary_region = "ord"
+
+[build]
+dockerfile = "Dockerfile"
+
+[[services]]
+internal_port = 80
+protocol = "tcp"
+[[services.ports]]
+port = 80
+handlers = ["http"]
+[[services.ports]]
+port = 443
+handlers = ["tls", "http"]

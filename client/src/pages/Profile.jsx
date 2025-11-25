@@ -148,7 +148,6 @@ const Profile = () => {
 
               {/* CTA Button */}
               <a
-                href="https://buymeacoffee.com/reactbd/e/442025"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-lg"

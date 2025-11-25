@@ -9,6 +9,6 @@ RUN npm ci --only=production
 # Copy source code
 COPY . .
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["npm", "start"]
