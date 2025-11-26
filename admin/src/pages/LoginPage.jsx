@@ -223,7 +223,7 @@ const LoginPage = () => {
           </form>
 
           {/* Liên kết Đăng ký */}
-          <div className="mt-6 text-center">
+          {/* <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Chưa có tài khoản?{" "}
               <Link
@@ -233,7 +233,7 @@ const LoginPage = () => {
                 Tạo tài khoản
               </Link>
             </p>
-          </div>
+          </div> */}
 
           {/* Các phần tử bổ sung */}
           <div className="mt-4 text-center">

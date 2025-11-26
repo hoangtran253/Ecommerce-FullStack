@@ -3,7 +3,7 @@ const ENV = import.meta.env.MODE || "development";
 
 const config = {
   development: {
-    API_BASE_URL: "http://localhost:3000",
+    API_BASE_URL: "http://localhost:8000",
     CLIENT_BASE_URL: "http://localhost:5173",
     ADMIN_BASE_URL: "http://localhost:5174",
     NODE_ENV: "development",
