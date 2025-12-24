@@ -4,6 +4,10 @@ A complete, production-ready e-commerce solution built with modern technologies 
 
 ![Orebi Shopping Platform](./client/public/home.png)
 
+Client URL : https://ecommerce-client-hoang.fly.dev
+Admin URL : https://ecommerce-admin-hoang.fly.dev
+
+
 ## 🌟 Features
 
 ### Customer Features
