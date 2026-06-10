@@ -1,0 +1,51 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs",
+    "dev": "cross-env NODE_ENV=development nodemon index.mjs",
+    "server": "cross-env NODE_ENV=development nodemon index.mjs",
+    "prod": "cross-env NODE_ENV=production node index.mjs",
+    "create-admin": "node createAdmin.mjs",
+    "seed": "node seed.mjs",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:excel": "jest",
+    "test:order": "jest tests/order.test.mjs",
+    "test:inventory": "jest tests/inventory.test.mjs",
+    "test:chatbot": "jest tests/chatbot.test.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "multer": "1.4.5-lts.1",
+    "nodemailer": "^8.0.7",
+    "nodemon": "^3.1.4",
+    "stripe": "^18.4.0",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.4.1",
+    "cross-env": "^10.1.0",
+    "exceljs": "^4.4.0",
+    "jest": "^30.4.2",
+    "mongodb-memory-server": "^11.1.0",
+    "supertest": "^7.2.2"
+  }
+}

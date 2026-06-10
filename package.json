@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "cors": "^2.8.6",
+    "prop-types": "^15.8.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.1",
+    "exceljs": "^4.4.0"
+  },
+  "scripts": {
+    "e2e": "playwright test",
+    "e2e:order": "playwright test e2e-tests/order.spec.ts",
+    "e2e:inventory": "playwright test e2e-tests/inventory.spec.ts",
+    "e2e:chatbot": "playwright test e2e-tests/chatbot.spec.ts",
+    "e2e:ui": "playwright test --ui"
+  }
+}

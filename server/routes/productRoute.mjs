@@ -1,0 +1,93 @@
+import { Router } from "express";
+import {
+  addProduct,
+  listProducts,
+  removeProduct,
+  singleProducts,
+  updateStock,
+  updateProduct,
+  getProductSoldCount,
+  addVariant,
+  deleteVariant,
+  updateVariantStock,
+  resetAllStock,
+} from "../controllers/productController.mjs";
+import {
+  getInventoryOverview,
+  getStockLogs,
+  importStock,
+  adjustStock,
+  auditStock,
+  updateStockThreshold,
+} from "../controllers/inventoryController.mjs";
+import upload from "../middleware/multer.mjs";
+import adminAuth from "../middleware/adminAuth.js";
+
+const router = Router();
+
+const routeValue = "/api/product/";
+
+// Admin routes for product management
+router.post(
+  `${routeValue}add`,
+  upload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
+  ]),
+  adminAuth,
+  addProduct
+);
+
+router.post(`${routeValue}remove`, adminAuth, removeProduct);
+
+router.put(
+  `${routeValue}update/:id`,
+  upload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
+  ]),
+  adminAuth,
+  updateProduct
+);
+
+router.post(`${routeValue}update-stock`, updateStock);
+
+router.get(`${routeValue}inventory`, adminAuth, getInventoryOverview);
+router.get(`${routeValue}inventory/logs`, adminAuth, getStockLogs);
+router.post(`${routeValue}inventory/import`, adminAuth, importStock);
+router.post(`${routeValue}inventory/adjust`, adminAuth, adjustStock);
+router.put(`${routeValue}inventory/:id/audit`, adminAuth, auditStock);
+router.patch(`${routeValue}inventory/:id/threshold`, adminAuth, updateStockThreshold);
+
+router.get(`${routeValue}single`, singleProducts);
+
+router.get(`${routeValue}:productId/sold-count`, getProductSoldCount);
+
+// Variant management routes
+router.post(`${routeValue}:productId/variants`, adminAuth, addVariant);
+router.delete(`${routeValue}:productId/variants/:variantIndex`, adminAuth, deleteVariant);
+router.patch(`${routeValue}:productId/variants/:variantIndex/stock`, adminAuth, updateVariantStock);
+
+// Reset all stock to 1
+router.post(`${routeValue}reset-stock`, adminAuth, resetAllStock);
+
+router.get(`${routeValue}list`, listProducts);
+
+// Public routes for frontend
+router.get("/api/products", listProducts);
+
+// Route để lấy sản phẩm theo loại (best_sellers, new_arrivals, etc.)
+router.get("/api/products/:type", (req, res, next) => {
+  req.query._type = req.params.type;
+  if (req.params.type === "best_sellers") {
+    // Sắp xếp theo số lượng đã bán nếu là best sellers
+    req.query.sort = "-soldQuantity";
+  }
+  listProducts(req, res, next);
+});
+
+export default router;
